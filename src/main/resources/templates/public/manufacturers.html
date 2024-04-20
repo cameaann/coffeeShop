@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manufactures</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<h1>Manufactures</h1>
+
+<h3>Add manufacture</h3>
+<form th:action="@{/manufacturers}" method="POST">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name"/>
+    </div>
+    <div>
+        <label for="url">Linkki:</label>
+        <input type="text" name="url" id="url"/>
+    </div>
+<!--    <div>-->
+<!--        <label for="product">Product:</label>-->
+<!--        <input type="text" name="product" id="product"/>-->
+<!--    </div>-->
+    <input type="submit"/>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nimi</th>
+        <th>Linkki</th>
+        <th>Tuotteet</th>
+        <th>Muokata</th>
+        <th>Pois</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="manufacturer : ${manufacturers}">
+        <td th:text="${manufacturer.getName()}" ></td>
+        <td>
+            <a th:class="link" th:href="${manufacturer.getUrl()}" th:text="${manufacturer.getUrl()}" target = "blank"></a>
+        </td>
+        <td>
+<!--            <ul th:each="product : ${manufacturer.getProducts()}">-->
+<!--                <li th:text="${product}"></li>-->
+<!--            </ul>-->
+        </td>
+        <td>
+            <a th:href="@{/manufacturer-edit/{id} (id=${manufacturer.id})}">Muokata</a>
+        </td>
+        <td>
+            <form th:action="@{/manufacturers/{manufacturerId} (manufacturerId=${manufacturer.id})}" th:method="DELETE">
+                <input type="submit" value="Remove"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit supplier</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<h3>Edit supplier</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Supplier</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th>Nimi</th>
+        <td th:text="${supplier.getName()}" ></td>
+    </tr>
+    <tr>
+        <th>Yhteyshenkilö</th>
+        <td th:text="${supplier.getContactPerson()}" ></td>
+    </tr>
+    <tr>
+        <th>YhteyshenkilöEmail</th>
+        <td th:text="${supplier.getContactPersonEmail()}" ></td>
+    </tr>
+    </tbody>
+</table>
+<form th:action="@{/supplier-edit/{supplierId}(supplierId = ${supplier.id})}" method="POST">
+    <div>
+        <label for="name">Name:</label>
+        <input th:value="${supplier.getName()}" type="text" name="name" id="name"/>
+    </div>
+    <div>
+        <label for="contactPerson">Contact person:</label>
+        <input th:value="${supplier.getContactPerson()}" type="text" name="contactPerson" id="contactPerson"/>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input th:value="${supplier.getContactPersonEmail()}" type="text" name="contactPersonEmail" id="email"/>
+    </div>
+    <input type="submit"/>
+</form>
+
+<a th:href="@{/suppliers}">back to the list</a>
+
+</body>
+</html>

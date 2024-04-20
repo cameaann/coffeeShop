@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- /*  Multiple fragments may be defined in one file */-->
+<div th:fragment="header">
+    <ul>
+        <li><a th:href="@{/coffee-equipment}">Coffee equipment</a></li>
+        <li><a th:href="@{/consumer-products}">Consumer products</a></li>
+        <li><a th:href="@{administrator}">Administrator</a></li>
+    </ul>
+</div>
+<!--<div th:fragment="header-admin">-->
+<!-- Admin Header-->
+<!--</div>-->
+</body>
+</html>

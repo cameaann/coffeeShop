@@ -100,7 +100,6 @@ public class ProductController {
 
     //    Methods for client page
     @GetMapping("/products")
-//    @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String showProducts(Model model, @RequestParam("page") Optional<Integer> page,
                                @RequestParam("size") Optional<Integer> size,
                                @RequestParam("id") long departmentId) {

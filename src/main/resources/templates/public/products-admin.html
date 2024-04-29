@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="styles.css">
+    <title>Admin Products Page</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<h1>Products page</h1>
+<h3>Add product</h3>
+<form th:action="@{/products-admin}" method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name"/>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description"/>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price"/>
+    </div>
+    <div>
+        <label for="file">Image:</label>
+        <input type="file" name="file" id="file"/>
+    </div>
+    <div>
+        <label for="departmentId">Osasto</label>
+        <select id="departmentId" name="departmentId">
+            <option th:each="department : ${departments}" th:value="${department.id}"
+                    th:text="${department.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="manufacturerId">Valmistaja</label>
+        <select id="manufacturerId" name="manufacturerId">
+            <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}"
+                    th:text="${manufacturer.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="supplierId">Toimittaja</label>
+        <select id="supplierId" name="supplierId">
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}"
+                    th:text="${supplier.name}"></option>
+        </select>
+    </div>
+    <input type="submit"/>
+
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nimi</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Department</th>
+        <th>Manufacturer</th>
+        <th>Supplier</th>
+        <th>Muokata</th>
+        <th>Pois</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.getName()}"></td>
+        <td th:text="${product.getDescription()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td>
+            <div th:if="${product.getProductImg()!=null}">
+                <img th:class="img-thumbnail" th:src="@{image/{id}(id=${product.id})}" alt="product image">
+            </div>
+
+        </td>
+        <td th:text="${product.getDepartment().name}"></td>
+        <td th:text="${product.getManufacturer().name}"></td>
+        <td th:text="${product.getSupplier().name}"></td>
+        <td>
+            <a th:href="@{/product-edit/{id} (id=${product.id})}">Muokata</a>
+        </td>
+        <td>
+            <form th:action="@{/products-admin/{productId} (productId=${product.id})}" th:method="DELETE">
+                <input type="submit" value="Remove"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

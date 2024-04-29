@@ -5,6 +5,8 @@ import coffeeShop.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 
 @Service
 public class DepartmentService {
@@ -13,5 +15,19 @@ public class DepartmentService {
 
     public Iterable<Department> list(){
         return departmentRepository.findAll();
+    }
+
+    public void add(String name, Long parentId){
+        Department department = new Department();
+        department.setName(name);
+        if (parentId != null) {
+            Department parent = departmentRepository.findById(parentId).orElse(null);
+            department.setParent(parent);
+        }
+        departmentRepository.save(department);
+    }
+
+    public Department getOne(Long id){
+        return departmentRepository.getReferenceById(id);
     }
 }

@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<h1>Products page</h1>
+<h1>Products</h1>
+<section>
+    <ul th:class="cards-container" >
+        <li th:each="product, iStat : ${productPage}" th:class="product-card">
+            <a th:href="@{/product-page/{id}(id=${product.id})}">
+                <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
+                     th:alt="${product.getProductImgName()}">
+                <h2 th:text="${product.getName()}"></h2>
+                <div th:text="${product.getDescription()}"></div>
+                <div th:text="${product.getPrice()}"></div>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<div th:if="${productPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/products (size=${productPage.size}, page=${pageNumber}, id=${departmentId} )}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==productPage.number + 1} ? active"></a>
+</div>
 
 </body>
 </html>

@@ -8,9 +8,9 @@
 <!-- /*  Multiple fragments may be defined in one file */-->
 <div th:fragment="header">
     <ul>
-        <li><a th:href="@{/coffee-equipment}">Coffee equipment</a></li>
-        <li><a th:href="@{/consumer-products}">Consumer products</a></li>
-        <li><a th:href="@{administrator}">Administrator</a></li>
+        <li><a th:href="@{/products(id=1)}">Coffee equipment</a></li>
+        <li><a th:href="@{/products(id=2)}">Consumer products</a></li>
+        <li><a th:href="@{/administrator}">Administrator</a></li>
     </ul>
 </div>
 <!--<div th:fragment="header-admin">-->

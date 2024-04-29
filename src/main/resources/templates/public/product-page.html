@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <title>Product page</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<section>
+    <figure>
+        <img class="productImage" th:src="@{/image/{id}(id=${product.id})}" th:alt="${product.getProductImgName()}">
+    </figure>
+    <h1 th:text="${product.getName()}"></h1>
+    <div>
+        <h4>Description</h4>
+        <span  th:text="${product.getDescription()}"></span>
+    </div>
+    <div>
+        <h4>Hinta</h4>
+        <span th:text="${product.getPrice()}"></span>
+    </div>
+</section>
+<a th:href="@{/products(id=${product.getDepartment().id})}">Back</a>
+
+</body>
+</html>

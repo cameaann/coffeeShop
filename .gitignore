@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Data base ###
+training base.mv.db
+training base.trace.db

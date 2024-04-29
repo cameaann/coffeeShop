@@ -20,10 +20,8 @@ public class SupplierService {
     @Transactional
     public void add(String name, String contactPerson, String contactPersonEmail){
         Supplier supplier = new Supplier();
-        supplier.setName(name);
-        supplier.setContactPerson(contactPerson);
-        supplier.setContactPersonEmail(contactPersonEmail);
-        supplierRepository.save(supplier);
+        supplierRepository.save(setSupplierSettings(name, contactPerson,
+                contactPersonEmail, supplier));
     }
 
     @Transactional
@@ -34,10 +32,8 @@ public class SupplierService {
     @Transactional
     public void change(String name, String contactPerson, String contactPersonEmail, Long id){
         Supplier supplier = supplierRepository.getReferenceById(id);
-        supplier.setName(name);
-        supplier.setContactPerson(contactPerson);
-        supplier.setContactPersonEmail(contactPersonEmail);
-        supplierRepository.save(supplier);
+        supplierRepository.save(setSupplierSettings(name, contactPerson,
+                contactPersonEmail, supplier));
     }
 
     @Transactional
@@ -48,5 +44,13 @@ public class SupplierService {
         else {
             throw new IllegalArgumentException("Supplier with ID " + id + " does not exist");
         }
+    }
+
+    private Supplier setSupplierSettings(String name, String contactPerson,
+                                         String contactPersonEmail, Supplier supplier){
+        supplier.setName(name);
+        supplier.setContactPerson(contactPerson);
+        supplier.setContactPersonEmail(contactPersonEmail);
+        return supplier;
     }
 }

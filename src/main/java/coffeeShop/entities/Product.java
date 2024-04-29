@@ -1,14 +1,14 @@
 package coffeeShop.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
-
+import java.util.Arrays;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +17,10 @@ public class Product extends AbstractPersistable<Long> {
     private String name;
     private String description;
     private BigDecimal price;
-    private String productImg;
+    @Lob
+    @Column(columnDefinition = "BLOB")
+    private byte[] productImg;
+    private String productImgName;
 
     @ManyToOne
     private Department department;
@@ -25,4 +28,5 @@ public class Product extends AbstractPersistable<Long> {
     private Supplier supplier;
     @ManyToOne
     private Manufacturer manufacturer;
+
 }

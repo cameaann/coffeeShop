@@ -5,43 +5,43 @@
     <title>Department</title>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"></div>
 <h1>Departments</h1>
 <h3>Add department</h3>
 <form th:action="@{/departments}" method="POST">
   <div>
-    <label for="name">Name:</label>
+    <label for="name">Nimi:</label>
     <input type="text" name="name" id="name"/>
   </div>
-  <div>
-    <label for="departmentIDP">Department IDP:</label>
-    <input type="text" name="departmentIDP" id="departmentIDP"/>
-  </div>
+  <label for="parentId">Parent Department:</label>
+  <select id="parentId" name="parentId">
+    <option value="">None</option>
+    <option th:each="parent : ${departments}" th:value="${parent.id}" th:text="${parent.name}"></option>
+  </select>
   <input type="submit"/>
 </form>
 
 <table>
   <thead>
   <tr>
-    <th>Nimi</th>
-    <th>Yhteyshenkilö</th>
-    <th>Muokata</th>
-    <th>Pois</th>
+    <th>Osastot</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="department : ${departments}">
-    <td th:text="${department.getName()}" ></td>
-    <td th:text="${department.getDepartmentIDP()}" ></td>
+  <tr th:each="department : ${departments}" th:if="${department.getParent()==null}">
     <td>
-      <a th:href="@{/department-edit/{id} (id=${department.id})}">Muokata</a>
-    </td>
-    <td>
-      <form th:action="@{/department/{departmentId} (departmentId=${department.id})}" th:method="DELETE">
-        <input type="submit" value="Pois"/>
-      </form>
-    </td>
+      <span th:text="${department.getName()}"></span>
+      <ul th:each="subdepartment : ${department.getChildren()}">
+        <li>
+          <span th:text="${subdepartment.getName()}"></span>
+          <ul th:each="sub : ${subdepartment.getChildren()}">
+            <li th:text="${sub.getName()}"></li>
+          </ul>
+        </li>
+      </ul>
   </tr>
   </tbody>
 </table>
+
 </body>
 </html>

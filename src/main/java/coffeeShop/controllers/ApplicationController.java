@@ -22,10 +22,10 @@ public class ApplicationController {
         return "public/administrator";
     }
 
-    @GetMapping("/products")
-    public String showProducts(){
-        return "public/products";
-    }
+//    @GetMapping("/products")
+//    public String showProducts(){
+//        return "public/products";
+//    }
 
 
 

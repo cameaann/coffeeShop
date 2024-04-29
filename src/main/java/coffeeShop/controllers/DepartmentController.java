@@ -1,5 +1,6 @@
 package coffeeShop.controllers;
 
+import coffeeShop.entities.Department;
 import coffeeShop.services.DepartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,23 @@ public class DepartmentController {
 
     @GetMapping("/departments")
     public String showDepartments(Model model){
-        model.addAttribute("departments", this.departmentService.list());
+        final Iterable<Department> departments = this.departmentService.list();
+        model.addAttribute("departments", departments);
         return "public/departments";
     }
 
     @PostMapping("/departments")
-    public String createDepartment(@RequestParam String name, @RequestParam Long departmentIDP){
-
+    public String createDepartment(@RequestParam String name, @RequestParam String parentId){
+        Long parId;
+        if(parentId.isEmpty()){
+            parId = null;
+        } else{
+            parId = Long.parseLong(parentId);
+        }
+        if(!name.isEmpty()){
+            this.departmentService.add(name, parId);
+            return "redirect:/departments";
+        }
         return "redirect:/departments";
     }
 }

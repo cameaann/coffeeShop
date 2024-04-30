@@ -4,6 +4,7 @@
     <title>Please Log In</title>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"></div>
 <h1>Please Log In</h1>
 <div th:if="${param.error}">
     Invalid username and password.

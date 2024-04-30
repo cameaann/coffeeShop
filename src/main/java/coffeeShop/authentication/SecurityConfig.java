@@ -1,5 +1,7 @@
 package coffeeShop.authentication;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,12 +26,13 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private CustomLogoutSuccessHandler logoutSuccessHandler;
+
     public static final String LOGIN_URL = "/login";
-    public static final String LOGOUT_URL = "/logout";
     public static final String LOGIN_FAIL_URL = LOGIN_URL + "?error";
-    public static final String DEFAULT_SUCCESS_URL = "/administrator";
-    public static final String USERNAME = "foo";
-    public static final String PASSWORD = "foo";
+    public static final String USERNAME = "Admin";
+    public static final String PASSWORD = "Admin";
 
     @Bean
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
@@ -39,54 +42,26 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/", "/home", "/products", "/product-page/{id}", "/login", "/h2-console").permitAll()
+                        .requestMatchers("/styles.css").permitAll()
+                        .requestMatchers("/image/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .loginPage(LOGIN_URL)
-                        .loginProcessingUrl(LOGIN_URL)
-                        .failureUrl(LOGIN_FAIL_URL)
-                        .usernameParameter(USERNAME)
-                        .passwordParameter(PASSWORD)
-                        .defaultSuccessUrl(DEFAULT_SUCCESS_URL)
                         .permitAll())
-                .logout(LogoutConfigurer::permitAll);
-//                .csrf(AbstractHttpConfigurer::disable));
+                .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler).permitAll());
         return http.build();
 
     }
 
-    //    @Bean
-//    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder){
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailsService);
-//        authenticationProvider.setPasswordEncoder(passwordEncoder);
-//
-//        ProviderManager providerManager = new ProviderManager(authenticationProvider);
-//        providerManager.setEraseCredentialsAfterAuthentication(false);
-//
-//        return providerManager;
-//    }
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("foo")
-                .password("foo")
+                .username(USERNAME)
+                .password(PASSWORD)
                 .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(userDetails);
     }
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 }
-
-//    @Bean
-//    public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
-//        return new HandlerMappingIntrospector();
-//    }
-
-
-//}

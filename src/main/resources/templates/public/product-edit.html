@@ -6,7 +6,7 @@
     <title>Edit product</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header-admin}"></div>
 <h1>Product page</h1>
 <h3>Edit product</h3>
 <form th:action="@{/product-edit/{productId}(productId = ${product.id})}" method="POST" enctype="multipart/form-data">

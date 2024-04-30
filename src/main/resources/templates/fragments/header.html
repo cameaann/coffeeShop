@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
 <body>
 <!-- /*  Multiple fragments may be defined in one file */-->
 <div th:fragment="header">
     <ul>
         <li><a th:href="@{/products(id=1)}">Coffee equipment</a></li>
         <li><a th:href="@{/products(id=2)}">Consumer products</a></li>
-        <li><a th:href="@{/administrator}">Administrator</a></li>
+
+    </ul>
+    <div sec:authorize="!hasRole('ADMIN')">
+        <span><a th:href="@{/administrator}">Log in as administrator</a></span>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        <span><a th:href="@{/administrator}">Administrator panel</a></span>
+    </div>
+</div>
+<div th:fragment="header-admin">
+    <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+    <a th:href="@{/}">Kahvi Kauppa</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <ul>
+        <li><a th:href="@{/suppliers}">Suppliers</a></li>
+        <li><a th:href="@{/manufacturers}">Manufactures</a></li>
+        <li><a th:href="@{/products-admin}">Products</a></li>
+        <li><a th:href="@{/departments}">Departments</a></li>
     </ul>
 </div>
-<!--<div th:fragment="header-admin">-->
-<!-- Admin Header-->
-<!--</div>-->
 </body>
 </html>

@@ -20,7 +20,10 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
 @EnableWebSecurity
@@ -41,15 +44,21 @@ public class SecurityConfig {
         // http builder configurations for authorize requests and form login
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/home", "/products", "/product-page/{id}", "/login", "/h2-console").permitAll()
+                        .requestMatchers("/", "/home", "/customer-registration", "/success-registration",
+                                "/products", "/product-page/{id}", "/login").permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(toH2Console()).permitAll()
                         .requestMatchers("/styles.css").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/image/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .loginPage(LOGIN_URL)
                         .permitAll())
-                .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler).permitAll());
+                .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler).permitAll())
+                .headers(headers -> headers.disable())
+                .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
         return http.build();
 
     }

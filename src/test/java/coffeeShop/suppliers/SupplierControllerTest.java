@@ -1,7 +1,7 @@
 package coffeeShop.suppliers;
 
 //import coffeeShop.authentication.SecurityConfig;
-import coffeeShop.entities.Supplier;
+import coffeeShop.models.Supplier;
 import coffeeShop.repositories.SupplierRepository;
 import org.junit.Assert;
 import org.junit.Test;

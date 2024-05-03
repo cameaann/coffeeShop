@@ -16,15 +16,15 @@
     <tbody>
     <tr>
         <th>Nimi</th>
-        <td th:text="${supplier.getName()}" ></td>
+        <td th:text="${supplier.getName()}"></td>
     </tr>
     <tr>
         <th>Yhteyshenkilö</th>
-        <td th:text="${supplier.getContactPerson()}" ></td>
+        <td th:text="${supplier.getContactPerson()}"></td>
     </tr>
     <tr>
         <th>YhteyshenkilöEmail</th>
-        <td th:text="${supplier.getContactPersonEmail()}" ></td>
+        <td th:text="${supplier.getContactPersonEmail()}"></td>
     </tr>
     </tbody>
 </table>
@@ -41,6 +41,18 @@
         <label for="email">Email:</label>
         <input th:value="${supplier.getContactPersonEmail()}" type="text" name="contactPersonEmail" id="email"/>
     </div>
+<!--    <tr>-->
+<!--        <th>Tuotteet</th>-->
+<!--        <td>-->
+<!--            should be a list of products-->
+<!--            <ul th:each="product : ${supplier.getProducts()}">-->
+<!--                <li>-->
+<!--                    <a th:href="@{/product-page/{id}(id=${product.id})}">-->
+<!--                        <span th:text="${product.getName()}">product</span>-->
+<!--                    </a></li>-->
+<!--            </ul>-->
+<!--        </td>-->
+<!--    </tr>-->
     <input type="submit"/>
 </form>
 

@@ -1,12 +1,10 @@
 package coffeeShop.services;
 
-import coffeeShop.entities.Supplier;
+import coffeeShop.models.Supplier;
 import coffeeShop.repositories.SupplierRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class SupplierService {

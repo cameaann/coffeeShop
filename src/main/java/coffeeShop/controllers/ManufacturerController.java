@@ -1,6 +1,5 @@
 package coffeeShop.controllers;
 
-import coffeeShop.entities.Product;
 import coffeeShop.services.ManufacturerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
 
 @Controller
 public class ManufacturerController {
@@ -21,7 +18,7 @@ public class ManufacturerController {
     @GetMapping("/manufacturers")
     public String getManufacturers(Model model){
         model.addAttribute("manufacturers", manufacturerService.list());
-        return "public/manufacturers";
+        return "admin/manufacturers";
     }
 
     @PostMapping("/manufacturers")
@@ -37,7 +34,7 @@ public class ManufacturerController {
     @GetMapping("/manufacturer-edit/{manufacturerId}")
     public String getManufacturer(Model model,  @PathVariable(value = "manufacturerId") long manufacturerId){
         model.addAttribute("manufacturer", this.manufacturerService.getOne(manufacturerId));
-        return "public/manufacturer-edit";
+        return "admin/manufacturer-edit";
     }
 
     @PostMapping("/manufacturer-edit/{manufacturerId}")

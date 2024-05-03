@@ -15,7 +15,7 @@ public class ApplicationController {
 
     @GetMapping("/administrator")
     public String showAdmin(){
-        return "public/administrator";
+        return "admin/administrator";
     }
 
 }

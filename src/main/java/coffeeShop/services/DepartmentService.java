@@ -1,11 +1,9 @@
 package coffeeShop.services;
 
-import coffeeShop.entities.Department;
+import coffeeShop.models.Department;
 import coffeeShop.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 
 @Service

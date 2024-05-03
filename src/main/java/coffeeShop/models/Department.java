@@ -1,4 +1,4 @@
-package coffeeShop.entities;
+package coffeeShop.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

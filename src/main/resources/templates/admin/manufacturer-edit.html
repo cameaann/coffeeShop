@@ -22,15 +22,15 @@
         <th>Url</th>
         <td th:text="${manufacturer.getUrl()}" ></td>
     </tr>
-    <tr>
-        <th>Tuotteet</th>
-        <td>
-            should be a list of products
+<!--    <tr>-->
+<!--        <th>Tuotteet</th>-->
+<!--        <td>-->
+<!--            should be a list of products-->
 <!--            <ul  th:each="product : ${manufacturer.getProducts()}">-->
 <!--                <li th:text="${product.getName()}">product</li>-->
 <!--            </ul>-->
-        </td>
-    </tr>
+<!--        </td>-->
+<!--    </tr>-->
 
     </tbody>
 </table>
@@ -43,13 +43,13 @@
         <label for="url">Linkki:</label>
         <input th:value="${manufacturer.getUrl()}" type="text" name="url" id="url"/>
     </div>
-    <div>
-        <label for="product">Tuote:</label>
-        <ul th:each="product : ${manufacturer.getProducts()}">
-            <li><input th:value="${product.getName()}" type="text" name="product" id="product"/>product</li>
-        </ul>
+<!--    <div>-->
+<!--        <label for="product">Tuote:</label>-->
+<!--        <ul th:each="product : ${manufacturer.getProducts()}">-->
+<!--            <li><input th:value="${product.getName()}" type="text" name="product" id="product"/>product</li>-->
+<!--        </ul>-->
 
-    </div>
+<!--    </div>-->
     <input type="submit"/>
 </form>
 

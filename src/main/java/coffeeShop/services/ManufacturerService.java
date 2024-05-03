@@ -1,14 +1,10 @@
 package coffeeShop.services;
 
-import coffeeShop.entities.Manufacturer;
-import coffeeShop.entities.Product;
-import coffeeShop.entities.Supplier;
+import coffeeShop.models.Manufacturer;
 import coffeeShop.repositories.ManufacturerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class ManufacturerService {

@@ -12,8 +12,8 @@
     <ul>
         <li><a th:href="@{/products(id=1)}">Coffee equipment</a></li>
         <li><a th:href="@{/products(id=2)}">Consumer products</a></li>
-
     </ul>
+    <span><a th:href="@{/customer-registration}">Register as VIP Customer</a></span>
     <div sec:authorize="!hasRole('ADMIN')">
         <span><a th:href="@{/administrator}">Log in as administrator</a></span>
     </div>

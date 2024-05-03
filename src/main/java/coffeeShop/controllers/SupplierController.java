@@ -1,6 +1,5 @@
 package coffeeShop.controllers;
 
-import coffeeShop.repositories.SupplierRepository;
 import coffeeShop.services.SupplierService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,7 @@ public class SupplierController {
     @GetMapping("/suppliers")
     public String getSuppliers(Model model) {
         model.addAttribute("suppliers", this.supplierService.list());
-        return "public/suppliers";
+        return "admin/suppliers";
     }
 
     @PostMapping("/suppliers")
@@ -34,7 +33,7 @@ public class SupplierController {
     @GetMapping("/supplier-edit/{supplierId}")
     public String getSupplier(Model model,  @PathVariable(value = "supplierId") long supplierId){
         model.addAttribute("supplier", this.supplierService.getOne(supplierId));
-        return "public/supplier-edit";
+        return "admin/supplier-edit";
     }
 
     @PostMapping("/supplier-edit/{supplierId}")

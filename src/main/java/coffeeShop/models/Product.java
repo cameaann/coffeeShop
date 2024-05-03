@@ -1,6 +1,5 @@
-package coffeeShop.entities;
+package coffeeShop.models;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

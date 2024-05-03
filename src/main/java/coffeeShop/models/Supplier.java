@@ -1,4 +1,4 @@
-package coffeeShop.entities;
+package coffeeShop.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -14,9 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Manufacturer extends AbstractPersistable<Long> {
+public class Supplier extends AbstractPersistable<Long> {
     private String name;
-    private String url;
-    @OneToMany(mappedBy = "manufacturer")
-    private List<Product> products = new ArrayList<>();
+    private String contactPerson;
+    private String contactPersonEmail;
+
+    @OneToMany(mappedBy = "supplier")
+    List <Product>products = new ArrayList<>();
 }

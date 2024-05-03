@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
@@ -7,6 +7,16 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<form th:action="@{/products}" method="get">
+    <input type="hidden" name="id" th:value="${departmentId}" />
+    <label th:for="manufacturerId">Search brand</label>
+    <select id="manufacturerId" name="manufacturerId" onchange="this.form.submit()">
+<!--        <option value="">Brand</option>-->
+        <option th:value="all" th:selected="${manufacturerId == selectedManufacturerId}">All brands</option>
+        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}"
+                    th:text="${manufacturer.name}" th:selected="${manufacturer.id == selectedManufacturerId}"></option>
+    </select>
+</form>
 <h1>Products</h1>
 <section>
     <ul th:class="cards-container" >

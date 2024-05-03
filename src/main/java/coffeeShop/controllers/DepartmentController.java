@@ -1,11 +1,10 @@
 package coffeeShop.controllers;
 
-import coffeeShop.entities.Department;
+import coffeeShop.models.Department;
 import coffeeShop.services.DepartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +20,7 @@ public class DepartmentController {
     public String showDepartments(Model model){
         final Iterable<Department> departments = this.departmentService.list();
         model.addAttribute("departments", departments);
-        return "public/departments";
+        return "admin/departments";
     }
 
     @PostMapping("/departments")

@@ -1,29 +1,22 @@
 package coffeeShop.services;
 
-import coffeeShop.entities.Department;
-import coffeeShop.entities.Manufacturer;
-import coffeeShop.entities.Product;
-import coffeeShop.entities.Supplier;
+import coffeeShop.models.Department;
+import coffeeShop.models.Manufacturer;
+import coffeeShop.models.Product;
 import coffeeShop.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Null;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.tools.FileObject;
-import java.awt.print.Book;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -110,13 +103,20 @@ public class ProductService {
         }
     }
 
-    public Page<Product> findPaginated(Pageable pageable, long departmentId) {
+    public Page<Product> findPaginated(Pageable pageable, long departmentId, String brandId) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-
+        List<Product> products;
         Department department = departmentService.getOne(departmentId);
-        List<Product> products = productRepository.findAllByDepartment(department);
+
+        if(brandId != null && !brandId.equals("all")){
+            Manufacturer manufacturer = manufacturerService.getOne(Long.parseLong(brandId));
+            products = productRepository.findAllByDepartmentAndManufacturer(department, manufacturer);
+        }else{
+            products = productRepository.findAllByDepartment(department);
+        }
+
         List<Product> list;
 
         if (products.size() < startItem) {

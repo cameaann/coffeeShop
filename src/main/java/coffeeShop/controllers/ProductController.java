@@ -1,12 +1,13 @@
 package coffeeShop.controllers;
 
-import coffeeShop.entities.Product;
+import coffeeShop.models.Product;
 import coffeeShop.services.DepartmentService;
 import coffeeShop.services.ManufacturerService;
 import coffeeShop.services.ProductService;
 import coffeeShop.services.SupplierService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class ProductController {
         model.addAttribute("manufacturers", manufacturerService.list());
         model.addAttribute("products", productService.list());
 
-        return "public/products-admin";
+        return "admin/products-admin";
     }
 
     @GetMapping(path = "image/{id}", produces = "images/jpeg")
@@ -76,7 +77,7 @@ public class ProductController {
         model.addAttribute("departments", departmentService.list());
         model.addAttribute("suppliers", supplierService.list());
         model.addAttribute("manufacturers", manufacturerService.list());
-        return "public/product-edit";
+        return "admin/product-edit";
     }
 
     @PostMapping("/product-edit/{productId}")
@@ -102,14 +103,22 @@ public class ProductController {
     @GetMapping("/products")
     public String showProducts(Model model, @RequestParam("page") Optional<Integer> page,
                                @RequestParam("size") Optional<Integer> size,
-                               @RequestParam("id") long departmentId) {
+                               @RequestParam("id") long departmentId,
+                               @Param("manufacturerId") String manufacturerId) {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(18);
 
-        Page<Product> productPage = productService.findPaginated(PageRequest.of(currentPage - 1, pageSize), departmentId);
+        Page<Product> productPage = productService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+                departmentId, manufacturerId);
 
         model.addAttribute("productPage", productPage);
         model.addAttribute("departmentId", departmentId);
+        model.addAttribute("manufacturers", this.manufacturerService.list());
+        if (manufacturerId != null && !manufacturerId.equals("all")){
+            int selectedManufacturerId = Integer.parseInt(manufacturerId);
+            model.addAttribute("selectedManufacturerId", selectedManufacturerId);
+        }
+
 
         int totalPages = productPage.getTotalPages();
         if (totalPages > 0) {
@@ -123,10 +132,17 @@ public class ProductController {
     }
 
     @GetMapping("/product-page/{id}")
-    public String showOneProduct(Model model, @PathVariable(value = "id") long productId){
+    public String showOneProduct(Model model, @PathVariable(value = "id") long productId) {
         model.addAttribute("product", productService.getOne(productId));
         return "public/product-page";
     }
 
 
+    // Get product by brand
+//    @GetMapping("/products")
+//    public String getProductByBrand(@RequestParam("brand") String brand,
+//                                    @RequestParam("id") String departmentId, Model model) {
+//
+//        return "public/products";
+//    }
 }

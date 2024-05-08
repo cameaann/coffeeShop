@@ -1,4 +1,7 @@
 package coffeeShop.exceptions;
 
-public class AuthenticationFailException {
+public class AuthenticationFailException extends IllegalArgumentException{
+    public AuthenticationFailException(String msg){
+        super(msg);
+    }
 }

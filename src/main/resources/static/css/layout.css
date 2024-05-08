@@ -37,7 +37,7 @@ h3 {
 
 .main-banner {
     position: relative;
-    background-image: url("./images/mixCoffee.png");
+    background-image: url("../images/mixCoffee.png");
     background-size: cover;
     height: 80vh;
     display: flex;

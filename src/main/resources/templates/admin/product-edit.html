@@ -2,97 +2,102 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Edit product</title>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header-admin}"></div>
-<h1>Product page</h1>
-<h3>Edit product</h3>
-<form th:action="@{/product-edit/{productId}(productId = ${product.id})}" method="POST" enctype="multipart/form-data">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" th:value="${product.getName()}"/>
-    </div>
-    <div>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" th:text="${product.getDescription()}"></textarea>
-    </div>
-    <div>
-        <label for="price">Price:</label>
-        <input type="text" name="price" id="price" th:value="${product.getPrice()}"/>
-    </div>
-    <div>
-        <label for="file">Image:</label>
-        <span th:text="${product.getProductImgName()}"></span>
-        Choose another image:
-        <input type="file" name="file" id="file" th:value="${product.getProductImgName()}" />
-    </div>
-    <div>
-        <label for="departmentId">Osasto</label>
-        <select id="departmentId" name="departmentId">
-            <option th:text="${product.getDepartment().getName()}" th:value="${product.getDepartment().getId()}"></option>
-            <option th:each="department : ${departments}" th:value="${department.id}"
-                    th:text="${department.getName()}"></option>
-        </select>
-    </div>
-    <div>
-        <label for="manufacturerId">Valmistaja</label>
-        <select id="manufacturerId" name="manufacturerId">
-            <option th:text="${product.getManufacturer().getName()}" th:value="${product.getManufacturer().getId()}"></option>
-            <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}"
-                    th:text="${manufacturer.getName()}"></option>
-        </select>
-    </div>
-    <div>
-        <label for="supplierId">Toimittaja</label>
-        <select id="supplierId" name="supplierId">
-            <option th:text="${product.getSupplier().getName()}" th:value="${product.getSupplier().getId()}"></option>
-            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}"
-                    th:text="${supplier.getName()}"></option>
-        </select>
-    </div>
-    <input type="submit"/>
+<main class="main">
+    <h1>Product page</h1>
+    <h3>Edit product</h3>
+    <form class="form" th:action="@{/product-edit/{productId}(productId = ${product.id})}" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" th:value="${product.getName()}"/>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" th:text="${product.getDescription()}"></textarea>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="text" name="price" id="price" th:value="${product.getPrice()}"/>
+        </div>
+        <div>
+            <label for="file">Image:</label>
+            <span th:text="${product.getProductImgName()}"></span>
+            Choose another image:
+            <input type="file" name="file" id="file" th:value="${product.getProductImgName()}" />
+        </div>
+        <div>
+            <label for="departmentId">Osasto</label>
+            <select id="departmentId" name="departmentId">
+                <option th:text="${product.getDepartment().getName()}" th:value="${product.getDepartment().getId()}"></option>
+                <option th:each="department : ${departments}" th:value="${department.id}"
+                        th:text="${department.getName()}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="manufacturerId">Valmistaja</label>
+            <select id="manufacturerId" name="manufacturerId">
+                <option th:text="${product.getManufacturer().getName()}" th:value="${product.getManufacturer().getId()}"></option>
+                <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}"
+                        th:text="${manufacturer.getName()}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="supplierId">Toimittaja</label>
+            <select id="supplierId" name="supplierId">
+                <option th:text="${product.getSupplier().getName()}" th:value="${product.getSupplier().getId()}"></option>
+                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}"
+                        th:text="${supplier.getName()}"></option>
+            </select>
+        </div>
+        <input type="submit"/>
 
-</form>
+    </form>
 
-<table>
-    <tbody>
-    <tr>
-        <th>Nimi</th>
-        <td th:text="${product.getName()}"></td>
-    </tr>
-    <tr>
-        <th>Description</th>
-        <td th:text="${product.getDescription()}"></td>
-    </tr>
-    <tr>
-        <th>Price</th>
-        <td th:text="${product.getPrice()}"></td>
-    </tr>
-    <tr>
-        <th>Image</th>
-        <td>
-            <div th:if="${product.getProductImg()!=null}">
-                <img th:class="img-thumbnail" th:src="@{/image/{id}(id=${product.id})}" alt="product image">
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <th>Department</th>
-        <td th:text="${product.getDepartment().name}"></td>
-    </tr>
-    <tr>
-        <th>Manufacturer</th>
-        <td th:text="${product.getManufacturer().name}"></td>
-    </tr>
-    <tr>
-        <th>Supplier</th>
-        <td th:text="${product.getSupplier().name}"></td>
-    </tr>
-    </tbody>
-</table>
-<a th:href="@{/products-admin}">Back to product list</a>
-
+    <table>
+        <tbody>
+        <tr>
+            <th>Nimi</th>
+            <td th:text="${product.getName()}"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td th:text="${product.getDescription()}"></td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td th:text="${product.getPrice()}"></td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>
+                <div th:if="${product.getProductImg()!=null}">
+                    <img th:class="img-thumbnail" th:src="@{/image/{id}(id=${product.id})}" alt="product image">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td th:text="${product.getDepartment().name}"></td>
+        </tr>
+        <tr>
+            <th>Manufacturer</th>
+            <td th:text="${product.getManufacturer().name}"></td>
+        </tr>
+        <tr>
+            <th>Supplier</th>
+            <td th:text="${product.getSupplier().name}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/products-admin}">Back to product list</a>
+</main>
 </body>
 </html>

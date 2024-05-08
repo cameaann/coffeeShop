@@ -2,54 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Suppliers</title>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header-admin}"></div>
-<h1>Suppliers</h1>
-<h3>Add supplier</h3>
-<form th:action="@{/suppliers}" method="POST">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name"/>
-    </div>
-    <div>
-        <label for="contactPerson">Contact person:</label>
-        <input type="text" name="contactPerson" id="contactPerson"/>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="text" name="contactPersonEmail" id="email"/>
-    </div>
-    <input type="submit"/>
-</form>
+<main class="main">
+    <h3>Lisää toimittaja</h3>
+    <form class="form" th:action="@{/suppliers}" method="POST">
+        <div class="form-field">
+            <label for="name">Nimi</label>
+            <input type="text" name="name" id="name" placeholder="Dimex"/>
+        </div>
+        <div class="form-field">
+            <label for="contactPerson">Yhteyshenkilö</label>
+            <input type="text" name="contactPerson" id="contactPerson" placeholder="Anti Kokkonen"/>
+        </div>
+        <div class="form-field">
+            <label for="email">YhteyshenkilöEmail</label>
+            <input type="text" name="contactPersonEmail" id="email" placeholder="anti.kokkonen@gmail.com"/>
+        </div>
+        <input class="btn" type="submit"/>
+    </form>
 
-<table>
-    <thead>
-    <tr>
+    <table>
+        <thead>
+        <tr>
             <th>Nimi</th>
             <th>Yhteyshenkilö</th>
             <th>YhteyshenkilöEmail</th>
             <th>Muokata</th>
             <th>Pois</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="supplier : ${suppliers}">
-        <td th:text="${supplier.getName()}" ></td>
-        <td th:text="${supplier.getContactPerson()}" ></td>
-        <td th:text="${supplier.getContactPersonEmail()}" ></td>
-        <td>
-            <a th:href="@{/supplier-edit/{id} (id=${supplier.id})}">Muokata</a>
-        </td>
-        <td>
-            <form th:action="@{/suppliers/{supplierId} (supplierId=${supplier.id})}" th:method="DELETE">
-                <input type="submit" value="Remove"/>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="supplier : ${suppliers}">
+            <td th:text="${supplier.getName()}" ></td>
+            <td th:text="${supplier.getContactPerson()}" ></td>
+            <td th:text="${supplier.getContactPersonEmail()}" ></td>
+            <td>
+                <a th:href="@{/supplier-edit/{id} (id=${supplier.id})}">Muokata</a>
+            </td>
+            <td>
+                <form th:action="@{/suppliers/{supplierId} (supplierId=${supplier.id})}" th:method="DELETE">
+                    <input class="btn white" type="submit" value="Poista"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

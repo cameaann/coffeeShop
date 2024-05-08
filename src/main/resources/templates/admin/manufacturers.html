@@ -2,61 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Manufactures</title>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header-admin}"></div>
-<h1>Manufactures</h1>
+<main class="main">
 
-<h3>Add manufacture</h3>
-<form th:action="@{/manufacturers}" method="POST">
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name"/>
-    </div>
-    <div>
-        <label for="url">Linkki:</label>
-        <input type="text" name="url" id="url"/>
-    </div>
-<!--    <div>-->
-<!--        <label for="product">Product:</label>-->
-<!--        <input type="text" name="product" id="product"/>-->
-<!--    </div>-->
-    <input type="submit"/>
-</form>
+    <h3>Lisää valmistaja</h3>
+    <form class="form" th:action="@{/manufacturers}" method="POST">
+        <div class="form-field">
+            <label for="name">Nimi</label>
+            <input type="text" name="name" id="name"/>
+        </div>
+        <div class="form-field">
+            <label for="url">Linkki</label>
+            <input type="text" name="url" id="url"/>
+        </div>
+        <!--    <div>-->
+        <!--        <label for="product">Product:</label>-->
+        <!--        <input type="text" name="product" id="product"/>-->
+        <!--    </div>-->
+        <input class="btn" type="submit"/>
+    </form>
 
-<table>
-    <thead>
-    <tr>
-        <th>Nimi</th>
-        <th>Linkki</th>
-        <th>Tuotteet</th>
-        <th>Muokata</th>
-        <th>Pois</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="manufacturer : ${manufacturers}">
-        <td th:text="${manufacturer.getName()}" ></td>
-        <td>
-            <a th:class="link" th:href="${manufacturer.getUrl()}" th:text="${manufacturer.getUrl()}" target = "blank"></a>
-        </td>
-        <td>
-<!--            <ul th:each="product : ${manufacturer.getProducts()}">-->
-<!--                <li th:text="${product}"></li>-->
-<!--            </ul>-->
-        </td>
-        <td>
-            <a th:href="@{/manufacturer-edit/{id} (id=${manufacturer.id})}">Muokata</a>
-        </td>
-        <td>
-            <form th:action="@{/manufacturers/{manufacturerId} (manufacturerId=${manufacturer.id})}" th:method="DELETE">
-                <input type="submit" value="Remove"/>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Linkki</th>
+<!--            <th>Tuotteet</th>-->
+            <th>Muokata</th>
+            <th>Pois</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="manufacturer : ${manufacturers}">
+            <td th:text="${manufacturer.getName()}" ></td>
+            <td>
+                <a th:class="link" th:href="${manufacturer.getUrl()}" th:text="${manufacturer.getUrl()}" target = "blank"></a>
+            </td>
+<!--            <td>-->
+                <!--            <ul th:each="product : ${manufacturer.getProducts()}">-->
+                <!--                <li th:text="${product}"></li>-->
+                <!--            </ul>-->
+<!--            </td>-->
+            <td>
+                <a th:href="@{/manufacturer-edit/{id} (id=${manufacturer.id})}">Muokata</a>
+            </td>
+            <td>
+                <form th:action="@{/manufacturers/{manufacturerId} (manufacturerId=${manufacturer.id})}" th:method="DELETE">
+                    <input class="btn white" type="submit" value="Poista"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 
 </body>
 </html>

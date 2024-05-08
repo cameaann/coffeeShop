@@ -1,6 +1,7 @@
 package coffeeShop.authentication;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,7 +21,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/departments").setViewName("admin/departments");
         registry.addViewController("/products-admin").setViewName("admin/products-admin");
 
-
-
+    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("classpath:/static/images/");
     }
 }

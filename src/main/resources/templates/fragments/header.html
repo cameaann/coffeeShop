@@ -1,41 +1,69 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
         <title>Title</title>
     </head>
 <body>
-<!-- /*  Multiple fragments may be defined in one file */-->
-<div th:fragment="header">
-    <ul>
-        <li><a th:href="@{/products(id=1)}">Coffee equipment</a></li>
-        <li><a th:href="@{/products(id=2)}">Consumer products</a></li>
-    </ul>
-    <span><a th:href="@{/customer-registration}">Register as VIP Customer</a></span>
-    <div sec:authorize="!hasRole('ADMIN')">
-        <span><a th:href="@{/administrator}">Log in as administrator</a></span>
-    </div>
-    <div sec:authorize="hasRole('ADMIN')">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-        <span><a th:href="@{/administrator}">Administrator panel</a></span>
-    </div>
-</div>
-<div th:fragment="header-admin">
-    <h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
-    <a th:href="@{/}">Kahvi Kauppa</a>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-    <ul>
-        <li><a th:href="@{/suppliers}">Suppliers</a></li>
-        <li><a th:href="@{/manufacturers}">Manufactures</a></li>
-        <li><a th:href="@{/products-admin}">Products</a></li>
-        <li><a th:href="@{/departments}">Departments</a></li>
+<!-- /*  Home-page header */-->
+<div class="header home" th:fragment="header-home">
+    <ul class="nav">
+        <li class="tab"><a th:href="@{/}">Kahvi Kauppa</a></li>
+        <li class="tab"><a th:href="@{/products(id=1)}">Kahvilaitteet</a></li>
+        <li class="tab"><a th:href="@{/products(id=2)}">Kulutustuotteet</a></li>
+        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/customer-registration}">
+            Registeröidy VIP-asiakkaaksi</a></li>
+        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/manufacturers}">
+            Kirjaudu</a></li>
+        <li class="tab" sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/manufacturers}">Järjestelmänvalvojan paneeli</a>
+        </li>
+        <li class="tab" sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{/logout}" method="post">
+                <input class="signOut" type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </li>
     </ul>
 </div>
+<!-- /*  Other-pages header */-->
+<div class="header" th:fragment="header">
+    <ul class="nav">
+        <li class="tab"><a th:href="@{/}">Kahvi Kauppa</a></li>
+        <li class="tab"><a th:href="@{/products(id=1)}">Kahvilaitteet</a></li>
+        <li class="tab"><a th:href="@{/products(id=2)}">Kulutustuotteet</a></li>
+        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/customer-registration}">
+            Registeröidy VIP-asiakkaaksi</a></li>
+        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/manufacturers}">
+            Kirjaudu</a></li>
+        <li class="tab" sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/manufacturers}">Järjestelmänvalvojan paneeli</a>
+        </li>
+        <li class="tab" sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{/logout}" method="post">
+                <input class="signOut" type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </li>
+    </ul>
+</div>
+
+
+<!-- /*  Header for Admin page */-->
+<div class="header" th:fragment="header-admin">
+    <ul class="nav">
+        <li><a th:href="@{/}">Kahvi Kauppa</a></li>
+        <li><a th:href="@{/suppliers}">Toimittajat</a></li>
+        <li><a class="active" th:href="@{/manufacturers}">Valmistajat</a></li>
+        <li><a th:href="@{/products-admin}">Tuotteet</a></li>
+        <li><a th:href="@{/departments}">Osastot</a></li>
+        <li>
+            <form th:action="@{/logout}" method="post">
+                <input class="signOut" type="submit" value="Kirjaudu ulos"/>
+            </form>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
 </body>
 </html>

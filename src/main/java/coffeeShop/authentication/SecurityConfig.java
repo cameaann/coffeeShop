@@ -48,9 +48,11 @@ public class SecurityConfig {
                                 "/products", "/product-page/{id}", "/login").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers(toH2Console()).permitAll()
-                        .requestMatchers("/styles.css").permitAll()
+                        .requestMatchers("/reset.css","/css/styles.css", "/variables.css","/layout.css", "/header.css", "/footer.css", "/product.css").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/image/**").permitAll()
+                        .requestMatchers("/script.js").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form

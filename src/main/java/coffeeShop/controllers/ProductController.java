@@ -1,5 +1,6 @@
 package coffeeShop.controllers;
 
+import coffeeShop.models.Department;
 import coffeeShop.models.Product;
 import coffeeShop.services.DepartmentService;
 import coffeeShop.services.ManufacturerService;
@@ -110,7 +111,9 @@ public class ProductController {
 
         Page<Product> productPage = productService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
                 departmentId, manufacturerId);
+        Department department = departmentService.getOne(departmentId);
 
+        model.addAttribute("departmentName", department.getName());
         model.addAttribute("productPage", productPage);
         model.addAttribute("departmentId", departmentId);
         model.addAttribute("manufacturers", this.manufacturerService.list());
@@ -137,12 +140,4 @@ public class ProductController {
         return "public/product-page";
     }
 
-
-    // Get product by brand
-//    @GetMapping("/products")
-//    public String getProductByBrand(@RequestParam("brand") String brand,
-//                                    @RequestParam("id") String departmentId, Model model) {
-//
-//        return "public/products";
-//    }
 }

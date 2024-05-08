@@ -1,0 +1,11 @@
+:root {
+    --textColor:  #6A6A6A;
+    --headingColor:#222222;
+    --textBtnColor:#FFFFFF;
+    --lightText:#FFFFFF;
+
+    --accentBtnColor: #b96b05;
+    --accentBtnColorHover: #9a5904;
+
+    --tableBorderColor: #bebcbc;
+}

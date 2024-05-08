@@ -1,0 +1,162 @@
+@import "variables.css";
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, p {
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+}
+
+h1 {
+    font-size: 2.8rem;
+    color: var(--headingColor);
+}
+
+h2 {
+    font-size: 2.2rem;
+    color: var(--headingColor);
+}
+
+h3 {
+    font-size: 1.8rem;
+    color: var(--headingColor);
+}
+
+.main {
+    padding: 2rem;
+    padding-block-start: 9rem;
+}
+
+.main-banner {
+    position: relative;
+    background-image: url("./images/mixCoffee.png");
+    background-size: cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-banner::before {
+    content: " ";
+    display: block;
+    height: 80vh;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(90deg, rgba(42, 6, 66, 1) 0%, rgba(70, 2, 2, 1) 50%, rgba(150, 94, 15, 1) 100%);
+    opacity: .7;
+    z-index: 21;
+}
+
+.welcome-heading {
+    z-index: 25;
+    margin: 0;
+    color: #FFFFFF;
+    position: relative;
+    text-align: center;
+    font-size: 3.6rem;
+    font-weight: normal;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+
+table {
+    margin-block-start: 4rem;
+    width: 100%;
+    border: 1px solid var(--textColor);
+    border-collapse: collapse;
+    margin-block-end: 5rem;
+}
+
+thead {
+    background-color: var(--accentBtnColor);
+    color: var(--lightText);
+    font-size: 1.4rem;
+    border: 1px solid var(--tableBorderColor);
+}
+
+td, th {
+    padding: 1rem;
+    border: 1px solid var(--tableBorderColor);
+    font-size: 1.4rem;
+}
+
+td > a.link:hover {
+    cursor: pointer;
+}
+
+/*BUTTONS*/
+.btn {
+    padding: .4rem 1rem;
+    margin-top: 2rem;
+    background-color: var(--accentBtnColor);
+    border: transparent;
+    border-radius: .3rem;
+    color: var(--textBtnColor);
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: var(--accentBtnColorHover);
+}
+
+.btn.white {
+    background-color: transparent;
+    border: 1px solid var(--accentBtnColor);
+    color: var(--accentBtnColor);
+}
+
+.form {
+    width: 50%;
+    margin-block-start: 4rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 1.5rem;
+}
+
+.form-field > label {
+    flex-basis: 30%;
+    margin-block-end: .3rem;
+}
+
+.form-field > input {
+    flex-basis: 70%;
+    padding: .3rem;
+}
+
+form > input.btn.white {
+    margin: 0;
+    justify-self: center;
+}
+.form-selection{
+    display: flex;
+    margin-block-end: 1.5rem;
+    align-items: center;
+
+}
+.form-selection>label{
+    flex-basis: 40%;
+    margin: 0;
+}
+.form-selection>select, input{
+    padding: .3rem;
+    flex-basis: 60%;
+}
+textarea{
+    height: 10rem;
+}

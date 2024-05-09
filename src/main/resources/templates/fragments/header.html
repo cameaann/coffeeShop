@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" th:href="@{/css/styles.css}">
-        <title>Title</title>
-    </head>
 <body>
 <!-- /*  Home-page header */-->
 <div class="header home" th:fragment="header-home">
@@ -18,7 +13,7 @@
         <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/manufacturers}">
             Kirjaudu</a></li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/manufacturers}">Järjestelmänvalvojan paneeli</a>
+            <a th:href="@{/manufacturers}">Tietojen hallinnointi (admin)</a>
         </li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
             <form th:action="@{/logout}" method="post">
@@ -38,7 +33,7 @@
         <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/manufacturers}">
             Kirjaudu</a></li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/manufacturers}">Järjestelmänvalvojan paneeli</a>
+            <a th:href="@{/manufacturers}">Tietojen hallinnointi (admin)</a>
         </li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
             <form th:action="@{/logout}" method="post">
@@ -47,7 +42,6 @@
         </li>
     </ul>
 </div>
-
 
 <!-- /*  Header for Admin page */-->
 <div class="header" th:fragment="header-admin">
@@ -64,6 +58,6 @@
         </li>
     </ul>
 </div>
-<script type="text/javascript" th:src="@{/js/script.js}"></script>
+
 </body>
 </html>

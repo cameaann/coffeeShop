@@ -16,7 +16,7 @@
     width: 20rem;
 
 }
-label{
+.search-form>label{
     margin-bottom: 1rem;
     font-size: 1.4rem;
 

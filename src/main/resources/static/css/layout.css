@@ -70,7 +70,7 @@ h3 {
     font-size: 1.6rem;
     text-transform: uppercase;
 }
-
+/*Tables*/
 
 table {
     margin-block-start: 4rem;
@@ -96,6 +96,22 @@ td, th {
 td > a.link:hover {
     cursor: pointer;
 }
+.vertical-heading{
+    width: 50%;
+}
+.vertical-heading >tbody>tr> th{
+    font-weight: bold;
+    text-align: left;
+}
+
+td>ul{
+    margin-inline-start: 1rem;
+}
+td ul>li{
+    margin-inline-start: 2rem;
+}
+
+
 
 /*BUTTONS*/
 .btn {
@@ -127,6 +143,9 @@ td > a.link:hover {
     display: flex;
     flex-direction: column;
     margin-block-end: 1.5rem;
+}
+label{
+    font-size: 1.2rem;
 }
 
 .form-field > label {

@@ -3,6 +3,7 @@ package coffeeShop.controllers;
 import coffeeShop.services.CustomerService;
 import coffeeShop.validation.CustomerForm;
 import jakarta.validation.Valid;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,26 +19,23 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("public/success-registration").setViewName("public/success-registration");
-//    }
-
     @GetMapping("/customer-registration")
-    public String viewFormRegisterCustomer(CustomerForm customerForm) {
+    public String viewFormRegisterCustomer(CustomerForm customerForm, Model model) {
+        model.addAttribute("customerForm", customerForm);
         return "public/customer-registration";
     }
 
     @PostMapping("/customer-registration")
-    public String registerCustomer(@Valid CustomerForm customerForm, BindingResult bindingResult, Model model,
-                                   @RequestParam String name, @RequestParam String email) {
+    public String registerCustomer(@Valid CustomerForm customerForm, BindingResult bindingResult,
+                                   @RequestParam String name, @RequestParam String email, Model model) {
+        model.addAttribute("customerForm", customerForm);
         if (bindingResult.hasErrors() || !this.customerService.isUniqueEmail(email)) {
             if(!this.customerService.isUniqueEmail(email)){
                 bindingResult.rejectValue("email", "error.email", "User with such email exists!");
             }
             return "public/customer-registration";
         } else {
-//            this.customerService.add(name, email);
+            this.customerService.add(name, email);
             return "redirect:/success-registration";
         }
     }

@@ -1,85 +1,22 @@
 @import "variables.css";
-
-.img-thumbnail{
-    width:5rem;
-    height: 5rem;
-}
-/*Products page for clients*/
-.search-form{
-    margin-block-start: 2rem;
-    margin-block-end: 4rem;
+/*Product page styles*/
+section.product{
     display: flex;
     flex-direction: column;
-    color: var(--textColor);
-}
-.search-form>select, label{
-    width: 20rem;
-
-}
-.search-form>label{
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-
-}
-.product-section{
-    width: 90rem;
-    margin: 5rem auto;
-}
-
-.cards-container{
-    display: flex;
-    gap:2rem;
-    flex-wrap: wrap;
-}
-.product-card{
-    display: flex;
-    flex-direction: column;
-    flex-basis: 30%;
-    font-size: 1.6rem;
     align-items: center;
 }
-.product-card>a{
-    text-decoration: none;
-    color:var(--headingColor);
-}
-li>a:hover{
-    cursor: pointer;
-}
-.product-card-img{
-    width:20rem;
-    height: 20rem;
+.singleProductCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:10rem;
+    margin-block-start: 10rem;
+    margin-block-end: 5rem;
 }
 
 .productImage{
-    width:20rem;
-    height:20rem;
-}
-
-.product-title{
-    font-size: 1.6rem;
-    color: var(--headingColor);
-    font-weight: normal;
-}
-
-.product-price{
-    font-size: 2rem;
-}
-
-.page-number-container{
-    display: flex;
-    flex-direction: row;
-    padding: 1rem;
-    margin: 2rem auto;
-    width: fit-content;
-}
-.pagination{
-    font-size: 1.6rem;
-    margin-inline-end: 1rem;
-}
-.pagination>a{
-    text-decoration: none;
-    color: dimgrey;
-}
-.pagination>a.active{
-    color: #f39317;
+    width:40rem;
+    height:40rem;
+    background-color: var(--imgBackground);
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -107,14 +108,19 @@ public class ProductService {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<Product> products;
+        List<Product> products = new ArrayList<>();
         Department department = departmentService.getOne(departmentId);
+        List<Department>departmentTree = getDepartmentsTree(department);
 
         if(brandId != null && !brandId.equals("all")){
             Manufacturer manufacturer = manufacturerService.getOne(Long.parseLong(brandId));
-            products = productRepository.findAllByDepartmentAndManufacturer(department, manufacturer);
+            for (Department dep : departmentTree) {
+                products.addAll(productRepository.findAllByDepartmentAndManufacturer(dep, manufacturer));
+            }
         }else{
-            products = productRepository.findAllByDepartment(department);
+            for (Department dep : departmentTree) {
+                products.addAll(productRepository.findAllByDepartment(dep));
+            }
         }
 
         List<Product> list;
@@ -128,6 +134,15 @@ public class ProductService {
 
         return new PageImpl<Product>(list, PageRequest.of(currentPage, pageSize),
                 products.size());
+    }
+
+    private List<Department> getDepartmentsTree(Department department){
+        List<Department> departments = new ArrayList<>();
+        departments.add(department);
+        for (Department child : department.getChildren()) {
+            departments.addAll(getDepartmentsTree(child));
+        }
+        return departments;
     }
 
 

@@ -7,7 +7,7 @@
 <div th:replace="~{fragments/header :: header-admin}"></div>
 <main class="main">
 
-    <h3>Lisää valmistaja</h3>
+    <h3>Lisää valmistajaa</h3>
     <form class="form" th:action="@{/manufacturers}" method="POST">
         <div class="form-field">
             <label for="name">Nimi</label>
@@ -17,10 +17,6 @@
             <label for="url">Linkki</label>
             <input type="text" name="url" id="url"/>
         </div>
-        <!--    <div>-->
-        <!--        <label for="product">Product:</label>-->
-        <!--        <input type="text" name="product" id="product"/>-->
-        <!--    </div>-->
         <input class="btn" type="submit"/>
     </form>
 
@@ -29,7 +25,6 @@
         <tr>
             <th>Nimi</th>
             <th>Linkki</th>
-<!--            <th>Tuotteet</th>-->
             <th>Muokata</th>
             <th>Pois</th>
         </tr>
@@ -40,23 +35,18 @@
             <td>
                 <a th:class="link" th:href="${manufacturer.getUrl()}" th:text="${manufacturer.getUrl()}" target = "blank"></a>
             </td>
-<!--            <td>-->
-                <!--            <ul th:each="product : ${manufacturer.getProducts()}">-->
-                <!--                <li th:text="${product}"></li>-->
-                <!--            </ul>-->
-<!--            </td>-->
-            <td>
-                <a th:href="@{/manufacturer-edit/{id} (id=${manufacturer.id})}">Muokata</a>
+            <td class="btnCell">
+                <a class="btn white" th:href="@{/manufacturer-edit/{id} (id=${manufacturer.id})}">Muokata</a>
             </td>
-            <td>
+            <td class="btnCell">
                 <form th:action="@{/manufacturers/{manufacturerId} (manufacturerId=${manufacturer.id})}" th:method="DELETE">
-                    <input class="btn white" type="submit" value="Poista"/>
+                    <input class="btn redBorder" type="submit" value="Poista"/>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

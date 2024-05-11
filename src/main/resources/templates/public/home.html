@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+
 <head th:replace="~{fragments/head :: common_head(~{::title}, ~{})}">
     <title>Home</title>
 </head>
 <body>
-<header th:replace="~{fragments/header :: header-home}"></header>
+<header th:replace="~{fragments/header :: header}"></header>
 <main>
     <div class="main-banner">
         <h1 class="welcome-heading">Aloita päiväsi kahvilla... </h1>
+    </div>
+    <div class="jumbothrone">
+
     </div>
 </main>
 <footer th:replace="~{fragments/footer :: footer}"></footer>

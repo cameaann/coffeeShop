@@ -4,22 +4,29 @@
     <title>Product page</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header(currentURI=${#httpServletRequest.getRequestURI()})}"></div>
-<section>
-    <figure>
-        <img class="productImage" th:src="@{/image/{id}(id=${product.id})}" th:alt="${product.getProductImgName()}">
-    </figure>
-    <h1 th:text="${product.getName()}"></h1>
-    <div>
-        <h4>Description</h4>
-        <span  th:text="${product.getDescription()}"></span>
-    </div>
-    <div>
-        <h4>Hinta</h4>
-        <span th:text="${product.getPrice()}"></span>
-    </div>
-</section>
-<a th:href="@{/products(id=${product.getDepartment().id})}">Back</a>
+<div th:replace="~{fragments/header :: header}"></div>
+<main class="main">
+    <section class="product">
+        <div class="singleProductCard">
+            <figure>
+                <img class="productImage" th:src="@{/image/{id}(id=${product.id})}" th:alt="${product.getProductImgName()}">
+            </figure>
+            <div>
+                <h1 th:text="${product.getName()}"></h1>
+                    <p  th:text="${product.getDescription()}"></p>
+                    <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
+                <button class="btn" type="submit">Lisää ostoskoriin</button>
+            </div>
+        </div>
+        <div>
+            <a class="link-btn" th:href="@{/products(id=${product.getDepartment().id})}">
+                <i class="fa-solid fa-arrow-left icon-back"></i>
+                Takaisin</a>
+        </div>
+    </section>
+
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

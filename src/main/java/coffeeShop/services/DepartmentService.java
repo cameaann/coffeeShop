@@ -15,6 +15,11 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    public Iterable<Department> listChildrenForParent(long id){
+        Department department = getOne(id);
+        return departmentRepository.findAllByParent(department);
+    }
+
     public void add(String name, Long parentId){
         Department department = new Department();
         department.setName(name);

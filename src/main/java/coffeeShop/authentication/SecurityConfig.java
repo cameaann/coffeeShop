@@ -48,11 +48,12 @@ public class SecurityConfig {
                                 "/products", "/product-page/{id}", "/login").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers(toH2Console()).permitAll()
-                        .requestMatchers("/reset.css","/css/styles.css", "/variables.css","/layout.css", "/header.css", "/footer.css", "/product.css").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/header.html", "/head.html").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/image/**").permitAll()
-                        .requestMatchers("/script.js").permitAll()
+                        .requestMatchers("/js/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
@@ -75,4 +76,5 @@ public class SecurityConfig {
 
         return new InMemoryUserDetailsManager(userDetails);
     }
+
 }

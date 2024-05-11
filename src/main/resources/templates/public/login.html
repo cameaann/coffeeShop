@@ -13,15 +13,18 @@
     <div th:if="${param.logout}">
         You have been logged out.
     </div>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <input type="text" name="username" placeholder="Username"/>
+    <form class="form" th:action="@{/login}" method="post">
+        <div class="form-field">
+            <label th:for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Username" autocomplete=""/>
         </div>
-        <div>
-            <input type="password" name="password" placeholder="Password"/>
+        <div class="form-field">
+            <label th:for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password" autocomplete=""/>
         </div>
         <input type="submit" value="Sign in"/>
     </form>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

@@ -1,16 +1,19 @@
 package coffeeShop.validation;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
 public class CustomerForm {
-
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min = 2, message = "Name should contain at least 2 character.")
     private String name;
 
     @NotNull
+    @NotEmpty(message = "The email is required")
+    @Email(message = "Email address should be in the right format")
     private String email;
 
     public String getName() {

@@ -7,24 +7,24 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <main class="main">
     <h3>Register as VIP customer</h3>
-    <div>Here should be Form For Customer registration</div>
-    <form action="#" th:action="@{/customer-registration}" th:object="${customerForm}" method="POST">
-        <div>
-            <label for="name">Nimi:</label>
-            <input type="text" name="name" id="name" th:field="*{name}"/>
+    <form class="form" th:action="@{/customer-registration}" th:object="${customerForm}" method="POST">
+        <div class="form-field">
+            <label for="name">Nimi</label>
+            <input type="text" id="name" th:field="*{name}"/>
             <span th:if="${#fields.hasErrors('name')}"
                   th:errors="*{name}"
                   class="error"></span>
         </div>
-        <div>
-            <label for="email">Sähköposti:</label>
-            <input type="text" name="email" id="email" th:field="*{email}"/>
+        <div class="form-field">
+            <label for="email">Sähköposti</label>
+            <input type="text" id="email" th:field="*{email}"/>
             <span th:if="${#fields.hasErrors('email')}"
                   th:errors="*{email}"
                   class="error"></span>
         </div>
-        <input type="submit"/>
+        <input class="btn" type="submit" th:value="Lähetä"/>
     </form>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

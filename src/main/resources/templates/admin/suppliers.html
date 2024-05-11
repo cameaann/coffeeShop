@@ -10,15 +10,15 @@
     <form class="form" th:action="@{/suppliers}" method="POST">
         <div class="form-field">
             <label for="name">Nimi</label>
-            <input type="text" name="name" id="name" placeholder="Dimex"/>
+            <input type="text" name="name" id="name"/>
         </div>
         <div class="form-field">
             <label for="contactPerson">Yhteyshenkilö</label>
-            <input type="text" name="contactPerson" id="contactPerson" placeholder="Anti Kokkonen"/>
+            <input type="text" name="contactPerson" id="contactPerson"/>
         </div>
         <div class="form-field">
             <label for="email">YhteyshenkilöEmail</label>
-            <input type="text" name="contactPersonEmail" id="email" placeholder="anti.kokkonen@gmail.com"/>
+            <input type="text" name="contactPersonEmail" id="email"/>
         </div>
         <input class="btn" type="submit"/>
     </form>
@@ -38,17 +38,18 @@
             <td th:text="${supplier.getName()}" ></td>
             <td th:text="${supplier.getContactPerson()}" ></td>
             <td th:text="${supplier.getContactPersonEmail()}" ></td>
-            <td>
-                <a th:href="@{/supplier-edit/{id} (id=${supplier.id})}">Muokata</a>
+            <td class="btnCell">
+                <a class="btn white" th:href="@{/supplier-edit/{id} (id=${supplier.id})}">Muokata</a>
             </td>
-            <td>
+            <td class="btnCell">
                 <form th:action="@{/suppliers/{supplierId} (supplierId=${supplier.id})}" th:method="DELETE">
-                    <input class="btn white" type="submit" value="Poista"/>
+                    <input class="btn redBorder" type="submit" value="Poista"/>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

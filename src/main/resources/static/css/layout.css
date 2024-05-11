@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -29,17 +29,23 @@ h3 {
     font-size: 1.8rem;
     color: var(--headingColor);
 }
+.jumbothrone{
+    height: 35vh;
+}
 
 .main {
+    width:80%;
+    min-height: 80vh;
     padding: 2rem;
     padding-block-start: 9rem;
+    margin: 0 auto;
 }
 
 .main-banner {
     position: relative;
     background-image: url("../images/mixCoffee.png");
     background-size: cover;
-    height: 80vh;
+    height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +54,7 @@ h3 {
 .main-banner::before {
     content: " ";
     display: block;
-    height: 80vh;
+    height: 60vh;
     width: 100%;
     position: absolute;
     background: linear-gradient(90deg, rgba(42, 6, 66, 1) 0%, rgba(70, 2, 2, 1) 50%, rgba(150, 94, 15, 1) 100%);
@@ -91,16 +97,19 @@ td, th {
     padding: 1rem;
     border: 1px solid var(--tableBorderColor);
     font-size: 1.4rem;
+    text-align: left;
+    vertical-align: top;
+    max-width: 20rem;
 }
 
 td > a.link:hover {
     cursor: pointer;
 }
 .vertical-heading{
-    width: 50%;
+    width: 50rem;
 }
 .vertical-heading >tbody>tr> th{
-    font-weight: bold;
+    font-weight:500;
     text-align: left;
 }
 
@@ -112,15 +121,14 @@ td ul>li{
 }
 
 
-
 /*BUTTONS*/
 .btn {
-    padding: .4rem 1rem;
-    margin-top: 2rem;
+    padding: .7rem 1rem;
     background-color: var(--accentBtnColor);
     border: transparent;
     border-radius: .3rem;
     color: var(--textBtnColor);
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -129,14 +137,32 @@ td ul>li{
 }
 
 .btn.white {
+    padding: .4rem 1rem;
     background-color: transparent;
     border: 1px solid var(--accentBtnColor);
     color: var(--accentBtnColor);
 }
+.btn.redBorder{
+    padding: .4rem 1rem;
+    background-color: transparent;
+    border: 1px solid var(--redColor);
+    color: var(--redColor);
+}
+.link-btn{
+    text-decoration: none;
+    color: var(--accentBtnColor);
+    font-size: 1.4rem;
+    margin-block-start: 2rem;
+}
+.icon-back{
+    color:var(--accentBtnColor);
+    font-size: 1.4rem;
+}
 
 .form {
-    width: 50%;
+    width: 40rem;
     margin-block-start: 4rem;
+    margin-block-end: 4rem;
 }
 
 .form-field {
@@ -154,8 +180,15 @@ label{
 }
 
 .form-field > input {
+    font-family: inherit;
     flex-basis: 70%;
     padding: .3rem;
+    border: 1px solid var(--tableBorderColor);
+}
+.form-field>select, textarea,
+.form-selection>select, textarea{
+    font-family: inherit;
+    border: 1px solid var(--tableBorderColor);
 }
 
 form > input.btn.white {
@@ -166,7 +199,9 @@ form > input.btn.white {
     display: flex;
     margin-block-end: 1.5rem;
     align-items: center;
-
+}
+.form-edit{
+    width: 50rem;
 }
 .form-selection>label{
     flex-basis: 40%;
@@ -176,6 +211,33 @@ form > input.btn.white {
     padding: .3rem;
     flex-basis: 60%;
 }
+.img-selection>label{
+    flex-basis: 0;
+}
+.img-selection{
+ gap: 1rem;
+}
 textarea{
     height: 10rem;
+}
+
+td.imgCell, td.btnCell{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.error{
+    color: var(--redColor);
+    margin-block-start: .5rem;
+}
+
+.success-reg{
+    background-color: var(--accentBtnColor);
+    padding: 2rem;
+    text-align: center;
+    width: 40rem;
+    margin: 15rem auto;
+}
+.success-reg>h3{
+    color: var(--lightText);
 }

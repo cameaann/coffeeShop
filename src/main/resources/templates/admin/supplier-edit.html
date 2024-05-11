@@ -6,13 +6,23 @@
 <body>
 <div th:replace="~{fragments/header :: header-admin}"></div>
 <main class="main">
-    <h3>Edit supplier</h3>
-    <table>
-        <thead>
-        <tr>
-            <th>Supplier</th>
-        </tr>
-        </thead>
+    <h3>Muokata toimittajaa</h3>
+    <form class="form" th:action="@{/supplier-edit/{supplierId}(supplierId = ${supplier.id})}" method="POST">
+        <div class="form-field">
+            <label for="name">Name:</label>
+            <input th:value="${supplier.getName()}" type="text" name="name" id="name"/>
+        </div>
+        <div class="form-field">
+            <label for="contactPerson">Contact person:</label>
+            <input th:value="${supplier.getContactPerson()}" type="text" name="contactPerson" id="contactPerson"/>
+        </div>
+        <div class="form-field">
+            <label for="email">Email:</label>
+            <input th:value="${supplier.getContactPersonEmail()}" type="text" name="contactPersonEmail" id="email"/>
+        </div>
+        <input class="btn" type="submit"/>
+    </form>
+    <table class="vertical-heading">
         <tbody>
         <tr>
             <th>Nimi</th>
@@ -28,35 +38,9 @@
         </tr>
         </tbody>
     </table>
-    <form class="form" th:action="@{/supplier-edit/{supplierId}(supplierId = ${supplier.id})}" method="POST">
-        <div class="form-field">
-            <label for="name">Name:</label>
-            <input th:value="${supplier.getName()}" type="text" name="name" id="name"/>
-        </div>
-        <div class="form-field">
-            <label for="contactPerson">Contact person:</label>
-            <input th:value="${supplier.getContactPerson()}" type="text" name="contactPerson" id="contactPerson"/>
-        </div>
-        <div class="form-field">
-            <label for="email">Email:</label>
-            <input th:value="${supplier.getContactPersonEmail()}" type="text" name="contactPersonEmail" id="email"/>
-        </div>
-        <!--    <tr>-->
-        <!--        <th>Tuotteet</th>-->
-        <!--        <td>-->
-        <!--            should be a list of products-->
-        <!--            <ul th:each="product : ${supplier.getProducts()}">-->
-        <!--                <li>-->
-        <!--                    <a th:href="@{/product-page/{id}(id=${product.id})}">-->
-        <!--                        <span th:text="${product.getName()}">product</span>-->
-        <!--                    </a></li>-->
-        <!--            </ul>-->
-        <!--        </td>-->
-        <!--    </tr>-->
-        <input type="submit"/>
-    </form>
-
-    <a th:href="@{/suppliers}">back to the list</a>
+    <a class="link-btn" th:href="@{/suppliers}"><i class="fa-solid fa-arrow-left icon-back"></i>
+        Takaisin</a>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

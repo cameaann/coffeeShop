@@ -7,7 +7,7 @@
 <div th:replace="~{fragments/header :: header-admin}"></div>
 <main class="main">
     <h3>Edit product</h3>
-    <form class="form" th:action="@{/product-edit/{productId}(productId = ${product.id})}" method="POST" enctype="multipart/form-data">
+    <form class="form form-edit" th:action="@{/product-edit/{productId}(productId = ${product.id})}" method="POST" enctype="multipart/form-data">
         <div class="form-field">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" th:value="${product.getName()}"/>
@@ -20,10 +20,9 @@
             <label for="price">Price:</label>
             <input type="text" name="price" id="price" th:value="${product.getPrice()}"/>
         </div>
-        <div class="form-selection">
-            <label for="file">Image:</label>
+        <div class="form-selection img-selection">
+            <label for="file">Kuva:</label>
             <span th:text="${product.getProductImgName()}"></span>
-            Choose another image:
             <input type="file" name="file" id="file" th:value="${product.getProductImgName()}" />
         </div>
         <div class="form-selection">
@@ -90,7 +89,9 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/products-admin}">Back to product list</a>
+    <a class="link-btn" th:href="@{/products-admin}"> <i class="fa-solid fa-arrow-left icon-back"></i>
+        Takaisin</a>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

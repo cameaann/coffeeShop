@@ -49,45 +49,46 @@
 
     </form>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Nimi</th>
-            <th>Kuvaus</th>
-            <th>Hinta</th>
-            <th>Kuva</th>
-            <th>Osasto</th>
-            <th>Valmistaja</th>
-            <th>Toimittaja</th>
-            <th>Muokata</th>
-            <th>Pois</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.getName()}"></td>
-            <td th:text="${product.getDescription()}"></td>
-            <td th:text="${product.getPrice()}"></td>
-            <td>
-                <div th:if="${product.getProductImg()!=null}">
-                    <img th:class="img-thumbnail" th:src="@{image/{id}(id=${product.id})}" alt="product image">
-                </div>
+    <div style="overflow-x:auto;">
+        <table>
+            <thead>
+            <tr>
+                <th>Nimi</th>
+                <th>Kuvaus</th>
+                <th>Hinta</th>
+                <th>Kuva</th>
+                <th>Osasto</th>
+                <th>Valmistaja</th>
+                <th>Toimittaja</th>
+                <th>Muokata</th>
+                <th>Pois</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td class="imgCell">
+                        <img th:if="${product.getProductImg()!=null}" th:class="img-thumbnail" th:src="@{image/{id}(id=${product.id})}" alt="product image">
 
-            </td>
-            <td th:text="${product.getDepartment().name}"></td>
-            <td th:text="${product.getManufacturer().name}"></td>
-            <td th:text="${product.getSupplier().name}"></td>
-            <td>
-                <a th:href="@{/product-edit/{id} (id=${product.id})}">Muokata</a>
-            </td>
-            <td>
-                <form th:action="@{/products-admin/{productId} (productId=${product.id})}" th:method="DELETE">
-                    <input class="btn white" type="submit" value="Remove"/>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+                <td th:text="${product.getDepartment().name}"></td>
+                <td th:text="${product.getManufacturer().name}"></td>
+                <td th:text="${product.getSupplier().name}"></td>
+                <td class="btnCell">
+                    <a class="btn white" th:href="@{/product-edit/{id} (id=${product.id})}">Muokata</a>
+                </td>
+                <td class="btnCell">
+                    <form th:action="@{/products-admin/{productId} (productId=${product.id})}" th:method="DELETE">
+                        <input class="btn redBorder" type="submit" value="Remove"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

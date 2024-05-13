@@ -74,7 +74,8 @@ public class ProductService {
         return contentType != null && (contentType.startsWith("image/jpeg") ||
                 contentType.startsWith("image/png") ||
                 contentType.startsWith("image/webp") ||
-                contentType.startsWith("image/gif"));
+                contentType.startsWith("image/gif") ||
+                contentType.startsWith("image/avif"));
     }
 
 

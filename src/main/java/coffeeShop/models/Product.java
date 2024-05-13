@@ -16,8 +16,9 @@ public class Product extends AbstractPersistable<Long> {
     private String name;
     private String description;
     private BigDecimal price;
+
     @Lob
-    @Column(columnDefinition = "BLOB")
+//    @Column(columnDefinition = "BLOB")
     private byte[] productImg;
     private String productImgName;
 

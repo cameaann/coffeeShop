@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 @Data
 public class Product extends AbstractPersistable<Long> {
     private String name;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
     private BigDecimal price;
 

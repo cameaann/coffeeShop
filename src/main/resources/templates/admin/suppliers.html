@@ -4,7 +4,7 @@
     <title>Suppliers</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header-admin}"></div>
+<div th:replace="~{fragments/header :: header-admin('Suppliers')}"></div>
 <main class="main">
     <h3>Lisää toimittaja</h3>
     <form class="form" th:action="@{/suppliers}" method="POST">

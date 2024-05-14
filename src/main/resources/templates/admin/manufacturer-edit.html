@@ -4,7 +4,7 @@
     <title>Edit manufacturer</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header-admin}"></div>
+<div th:replace="~{fragments/header :: header-admin('Manufactures')}"></div>
 <main class="main">
     <h3>Muokata valmistajaa</h3>
     <form class="form" th:action="@{/manufacturer-edit/{manufacturerId}(manufacturerId = ${manufacturer.id})}" method="POST">

@@ -135,7 +135,9 @@ public class ProductController {
     }
 
     @GetMapping("/product-page/{id}")
-    public String showOneProduct(Model model, @PathVariable(value = "id") long productId) {
+    public String showOneProduct(Model model, @PathVariable(value = "id") long productId,
+                                 @Param(value = "depId") long depId) {
+        model.addAttribute("depId", depId);
         model.addAttribute("product", productService.getOne(productId));
         return "public/product-page";
     }

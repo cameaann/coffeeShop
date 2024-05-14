@@ -37,6 +37,7 @@
     flex-basis: 30%;
     font-size: 1.6rem;
     align-items: center;
+    justify-content: space-between;
 }
 .product-card>a{
     text-decoration: none;
@@ -45,20 +46,31 @@
 li>a:hover{
     cursor: pointer;
 }
+.product-card-content{
+    display: flex;
+    flex-direction: column;
+}
+.product-card a>figure{
+    display: flex;
+    justify-content: center;
+}
 .product-card-img{
     width:20rem;
     height: 20rem;
+    flex-basis: 70%;
 }
 
 .product-title{
     font-size: 1.6rem;
     color: var(--headingColor);
-    font-weight: normal;
+    flex-basis: 3rem;
+    font-weight: 600;
 }
 
 .product-price{
     font-size: 2rem;
-    margin-block-end: 2rem;
+    /*margin-block-end: 2rem;*/
+    flex-basis: 4rem;
 }
 
 .page-number-container{

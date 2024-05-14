@@ -19,9 +19,11 @@
         </form>
         <ul th:class="cards-container" >
             <li th:each="product, iStat : ${productPage}" th:class="product-card">
-                <a th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
-                    <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
-                         th:alt="${product.getProductImgName()}">
+                <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
+                    <figure>
+                        <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
+                             th:alt="${product.getProductImgName()}">
+                    </figure>
                     <h3 class="product-title" th:text="${product.getName()}"></h3>
                     <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
                 </a>

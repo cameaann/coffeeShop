@@ -50,6 +50,7 @@
 }
 
 li>a.active{
+    color: var(--accentBtnColor);
     display: block;
     border-bottom:1px solid var(--lightText);
 }

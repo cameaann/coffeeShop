@@ -14,10 +14,15 @@ h1, h2, h3, p {
     margin-block-start: 1rem;
     margin-block-end: 1rem;
 }
+p{
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
 
 h1 {
     font-size: 2.8rem;
     color: var(--headingColor);
+    margin-block-end: 2rem;
 }
 
 h2 {
@@ -100,6 +105,8 @@ td, th {
     text-align: left;
     vertical-align: top;
     max-width: 20rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 td > a.link:hover {
@@ -136,7 +143,7 @@ td ul>li{
     background-color: var(--accentBtnColorHover);
 }
 
-.btn.white {
+.btn.white{
     padding: .4rem 1rem;
     background-color: transparent;
     border: 1px solid var(--accentBtnColor);
@@ -158,6 +165,9 @@ td ul>li{
     color:var(--accentBtnColor);
     font-size: 1.4rem;
 }
+/*input#file-upload-button{*/
+/*    */
+/*}*/
 
 .form {
     width: 40rem;

@@ -4,7 +4,7 @@
     <title>Edit supplier</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header-admin}"></div>
+<div th:replace="~{fragments/header :: header-admin('Suppliers')}"></div>
 <main class="main">
     <h3>Muokata toimittajaa</h3>
     <form class="form" th:action="@{/supplier-edit/{supplierId}(supplierId = ${supplier.id})}" method="POST">

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: common_head(~{::title}, ~{})}">
-    <title>Products</title>
+    <title th:text="${departmentName}"></title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header(${departmentId})}"></div>
 <main class="main">
     <section class="product-section">
         <h1 class="section-title" th:text="${departmentName}">Products</h1>
@@ -19,7 +19,7 @@
         </form>
         <ul th:class="cards-container" >
             <li th:each="product, iStat : ${productPage}" th:class="product-card">
-                <a th:href="@{/product-page/{id}(id=${product.id})}">
+                <a th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
                     <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
                          th:alt="${product.getProductImgName()}">
                     <h3 class="product-title" th:text="${product.getName()}"></h3>

@@ -4,20 +4,20 @@
     <title>New Customer Registration</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header('VipRegistration')}"></div>
 <main class="main">
     <h3>Register as VIP customer</h3>
     <form class="form" th:action="@{/customer-registration}" th:object="${customerForm}" method="POST">
         <div class="form-field">
             <label for="name">Nimi</label>
-            <input type="text" id="name" th:field="*{name}"/>
+            <input type="text" id="name" th:field="*{name}" autocomplete="off"/>
             <span th:if="${#fields.hasErrors('name')}"
                   th:errors="*{name}"
                   class="error"></span>
         </div>
         <div class="form-field">
             <label for="email">Sähköposti</label>
-            <input type="text" id="email" th:field="*{email}"/>
+            <input type="text" id="email" th:field="*{email}" autocomplete="off"/>
             <span th:if="${#fields.hasErrors('email')}"
                   th:errors="*{email}"
                   class="error"></span>

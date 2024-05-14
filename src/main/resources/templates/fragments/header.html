@@ -3,17 +3,19 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <body>
 <!-- /*   header */-->
-<div class="header" th:fragment="header">
+<div class="header" th:fragment="header(title)">
     <ul class="nav">
-        <li class="tab"><a th:href="@{/}">Kahvi Kauppa</a></li>
-        <li class="tab"><a th:href="@{/products(id=1)}">Kahvilaitteet</a></li>
-        <li class="tab"><a th:href="@{/products(id=2)}">Kulutustuotteet</a></li>
-        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/customer-registration}">
+        <li class="tab"><a th:class="${#strings.equals(title, 'Home')}  ? 'active':''" th:href="@{/}">Kahvi Kauppa</a></li>
+        <li class="tab"><a th:class="${title == 1 ? 'active': ' '}" th:href="@{/products(id=1)}">Kahvilaitteet</a></li>
+        <li class="tab"><a th:class="${title == 2 ? 'active': ' '}" th:href="@{/products(id=2)}">Kulutustuotteet</a></li>
+        <li class="tab" sec:authorize="!hasRole('ADMIN')">
+            <a th:class="${#strings.equals(title, 'VipRegistration')}? 'active':''" th:href="@{/customer-registration}">
             Registeröidy VIP-asiakkaaksi</a></li>
-        <li class="tab" sec:authorize="!hasRole('ADMIN')"><a th:href="@{/manufacturers}">
+        <li class="tab" sec:authorize="!hasRole('ADMIN')">
+            <a th:class="${#strings.equals(title, 'login')} ? 'active':''" th:href="@{/manufacturers}">
             Kirjaudu</a></li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/manufacturers}">Tietojen hallinnointi (admin)</a>
+            <a th:href="@{/manufacturers}">Admin</a>
         </li>
         <li class="tab" sec:authorize="hasRole('ADMIN')">
             <form th:action="@{/logout}" method="post">
@@ -24,13 +26,13 @@
 </div>
 
 <!-- /*  Header for Admin page */-->
-<div class="header" th:fragment="header-admin">
+<div class="header" th:fragment="header-admin(title)">
     <ul class="nav">
-        <li><a th:href="@{/}">Kahvi Kauppa</a></li>
-        <li><a th:href="@{/suppliers}">Toimittajat</a></li>
-        <li><a class="active" th:href="@{/manufacturers}">Valmistajat</a></li>
-        <li><a th:href="@{/products-admin}">Tuotteet</a></li>
-        <li><a th:href="@{/departments}">Osastot</a></li>
+        <li><a th:class="${#strings.equals(title, 'Home')}  ? 'active':''" th:href="@{/}">Kahvi Kauppa</a></li>
+        <li><a th:class="${#strings.equals(title, 'Suppliers')}  ? 'active' : ''" th:href="@{/suppliers}">Toimittajat</a></li>
+        <li><a th:class="${#strings.equals(title, 'Manufactures')}  ? 'active':''" th:href="@{/manufacturers}">Valmistajat</a></li>
+        <li><a th:class="${#strings.equals(title, 'Tuotteet')} ? 'active':''" th:href="@{/products-admin}">Tuotteet</a></li>
+        <li><a th:class="${#strings.equals(title,'Departments')} ? 'active':''" th:href="@{/departments}">Osastot</a></li>
         <li>
             <form th:action="@{/logout}" method="post">
                 <input class="signOut" type="submit" value="Kirjaudu ulos"/>

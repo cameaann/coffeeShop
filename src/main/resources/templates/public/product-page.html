@@ -4,7 +4,7 @@
     <title>Product page</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header(${depId})}"></div>
 <main class="main">
     <section class="product">
         <div class="singleProductCard">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div>
-            <a class="link-btn" th:href="@{/products(id=${product.getDepartment().id})}">
+            <a class="link-btn" th:href="@{/products(id=${depId})}">
                 <i class="fa-solid fa-arrow-left icon-back"></i>
                 Takaisin</a>
         </div>

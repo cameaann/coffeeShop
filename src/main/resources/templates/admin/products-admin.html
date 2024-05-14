@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: common_head(~{::title}, ~{})}">
-    <title>Admin Products Page</title>
+    <title>Tuotteet</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header-admin}"></div>
+<div th:replace="~{fragments/header :: header-admin('Tuotteet')}"></div>
 <main class="main">
     <h3>Lisää tuote</h3>
     <form class="form" th:action="@{/products-admin}" method="POST" enctype="multipart/form-data">

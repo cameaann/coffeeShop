@@ -1,5 +1,6 @@
 package coffeeShop.controllers;
 
+import coffeeShop.services.CartService;
 import coffeeShop.services.CustomerService;
 import coffeeShop.validation.CustomerForm;
 import jakarta.validation.Valid;
@@ -14,15 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
     private CustomerService customerService;
+    private CartService cartService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, CartService cartService) {
         this.customerService = customerService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/customer-registration")
     public String viewFormRegisterCustomer(CustomerForm customerForm, Model model) {
+        model.addAttribute("cart", cartService.getCart());
         model.addAttribute("customerForm", customerForm);
         return "public/customer-registration";
+    }
+
+    @GetMapping("/success-registration")
+    public String viewSuccessForm(Model model) {
+        model.addAttribute("cart", cartService.getCart());
+        return "public/success-registration";
     }
 
     @PostMapping("/customer-registration")

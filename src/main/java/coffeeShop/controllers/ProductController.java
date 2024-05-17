@@ -2,10 +2,7 @@ package coffeeShop.controllers;
 
 import coffeeShop.models.Department;
 import coffeeShop.models.Product;
-import coffeeShop.services.DepartmentService;
-import coffeeShop.services.ManufacturerService;
-import coffeeShop.services.ProductService;
-import coffeeShop.services.SupplierService;
+import coffeeShop.services.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
@@ -29,16 +26,20 @@ public class ProductController {
     private DepartmentService departmentService;
 
     private ManufacturerService manufacturerService;
+    private CartService cartService;
 
     public ProductController(ProductService productService,
                              SupplierService supplierService,
                              DepartmentService departmentService,
-                             ManufacturerService manufacturerService) {
+                             ManufacturerService manufacturerService,
+                             CartService cartService) {
         this.productService = productService;
         this.supplierService = supplierService;
         this.departmentService = departmentService;
         this.manufacturerService = manufacturerService;
+        this.cartService = cartService;
     }
+
 
 
     //Methods for work with products in Admin page
@@ -48,6 +49,7 @@ public class ProductController {
         model.addAttribute("suppliers", supplierService.list());
         model.addAttribute("manufacturers", manufacturerService.list());
         model.addAttribute("products", productService.list());
+        model.addAttribute("cart", cartService.getCart());
 
         return "admin/products-admin";
     }
@@ -74,7 +76,6 @@ public class ProductController {
     public String getProduct(Model model, @PathVariable(value = "productId") long productId) {
         Product product = this.productService.getOne(productId);
         model.addAttribute("product", product);
-
         model.addAttribute("departments", departmentService.list());
         model.addAttribute("suppliers", supplierService.list());
         model.addAttribute("manufacturers", manufacturerService.list());
@@ -130,6 +131,7 @@ public class ProductController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        model.addAttribute("cart", cartService.getCart());
 
         return "public/products";
     }
@@ -137,6 +139,7 @@ public class ProductController {
     @GetMapping("/product-page/{id}")
     public String showOneProduct(Model model, @PathVariable(value = "id") long productId,
                                  @Param(value = "depId") long depId) {
+        model.addAttribute("cart", cartService.getCart());
         model.addAttribute("depId", depId);
         model.addAttribute("product", productService.getOne(productId));
         return "public/product-page";

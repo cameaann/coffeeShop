@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+
+<head th:replace="~{fragments/head :: common_head(~{::title}, ~{})}">
+    <title>Cart</title>
 </head>
+<header th:replace="~{fragments/header :: header('Cart', ${cart.getNumberOfProducts()})}"></header>
 <body>
-$END$
+<main th:class="main">
+    <h1>Cart</h1>
+    <table th:class="cart-table">
+        <thead>
+        <tr>
+            <th>Tuotteen Nimi</th>
+            <th>Määrä</th>
+            <th>Hinta</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cart.getItems()}">
+            <td th:text="${item.getProductName()}"></td>
+            <td>
+                <div th:class="cart-number">
+                    <form th:action="@{/cart/increase/{productId}(productId = ${item.getProductId()})}" th:method="POST">
+                        <button th:class="cart-btn" type="submit">+</button>
+                    </form>
+                    <span th:text="${item.getQuantity()}">0</span>
+                    <form th:action="@{/cart/decrease/{productId}(productId = ${item.getProductId()})}" th:method="POST">
+                        <button th:class="cart-btn" type="submit">-</button>
+                    </form>
+                </div>
+            </td>
+            <td th:text="${item.getPrice()}"></td>
+        </tr>
+        <tr>
+            <td>
+                <span>Total</span>
+            </td>
+            <td th:text="${cart.getNumberOfProducts()}">0</td>
+            <td>
+                <span th:text="${cart.getTotalCost()  + '&euro;'}">0</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

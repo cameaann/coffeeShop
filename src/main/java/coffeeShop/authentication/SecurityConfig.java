@@ -45,7 +45,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/", "/home", "/customer-registration", "/success-registration",
-                                "/products", "/product-page/{id}", "/login").permitAll()
+                                "/products", "/product-page/{id}", "/login", "/cart",
+                                "/cart/increase/{itemId}", "/cart/decrease/{itemId}").permitAll()
 //                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
 //                        .requestMatchers(toH2Console()).permitAll()
                         .requestMatchers("/css/**").permitAll()

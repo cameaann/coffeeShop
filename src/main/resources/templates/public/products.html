@@ -4,7 +4,7 @@
     <title th:text="${departmentName}"></title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header(${departmentId})}"></div>
+<div th:replace="~{fragments/header :: header(${departmentId}, ${cart.getNumberOfProducts()})}"></div>
 <main class="main">
     <section class="product-section">
         <h1 class="section-title" th:text="${departmentName}">Products</h1>
@@ -27,7 +27,13 @@
                     <h3 class="product-title" th:text="${product.getName()}"></h3>
                     <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
                 </a>
-                <button class="btn" type="submit">Lisää ostoskoriin</button>
+
+                <form th:action="@{/cart(depId=${departmentId},
+                                    productId=${product.id},
+                                    name=${product.getName()},
+                                    price=${product.getPrice()})}" th:method="POST">
+                    <input class="btn" type="submit" value="Lisää ostoskoriin"/>
+                </form>
             </li>
         </ul>
         <div class="page-number-container" th:if="${productPage.totalPages > 0}" >

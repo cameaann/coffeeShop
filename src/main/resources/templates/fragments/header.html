@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <body>
 <!-- /*   header */-->
-<div class="header" th:fragment="header(title)">
+<div class="header" th:fragment="header(title, cart)">
     <ul class="nav">
         <li class="tab"><a th:class="${#strings.equals(title, 'Home')}  ? 'active':''" th:href="@{/}">Kahvi Kauppa</a></li>
         <li class="tab"><a th:class="${title == 1 ? 'active': ' '}" th:href="@{/products(id=1)}">Kahvilaitteet</a></li>
@@ -22,6 +22,10 @@
                 <input class="signOut" type="submit" value="Kirjaudu ulos"/>
             </form>
         </li>
+<!--        <li sec:authorize="!hasRole('ADMIN')">-->
+        <li>
+            <a th:class="${#strings.equals(title, 'Cart')}  ? 'active':''" th:href="@{/cart}">
+           <span th:class="cart-nav-item">Cart <span th:class="cart-badge" th:text="${cart}">0</span></span> </a></li>
     </ul>
 </div>
 

@@ -4,7 +4,7 @@
     <title>Product page</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header(${depId})}"></div>
+<div th:replace="~{fragments/header :: header(${depId}, ${cart.getNumberOfProducts()})}"></div>
 <main class="main">
     <section class="product">
         <div class="singleProductCard">

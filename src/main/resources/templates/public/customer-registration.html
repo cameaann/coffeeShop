@@ -4,7 +4,7 @@
     <title>New Customer Registration</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header('VipRegistration')}"></div>
+<div th:replace="~{fragments/header :: header('VipRegistration', ${cart.getNumberOfProducts()})}"></div>
 <main class="main">
     <h3>Register as VIP customer</h3>
     <form class="form" th:action="@{/customer-registration}" th:object="${customerForm}" method="POST">

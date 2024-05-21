@@ -3,9 +3,9 @@ package coffeeShop.services;
 import coffeeShop.models.Department;
 import coffeeShop.models.Manufacturer;
 import coffeeShop.models.Product;
+import coffeeShop.models.Supplier;
 import coffeeShop.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Null;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -110,20 +110,7 @@ public class ProductService {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<Product> products = new ArrayList<>();
-        Department department = departmentService.getOne(departmentId);
-        List<Department>departmentTree = getDepartmentsTree(department);
-
-        if(brandId != null && !brandId.equals("all")){
-            Manufacturer manufacturer = manufacturerService.getOne(Long.parseLong(brandId));
-            for (Department dep : departmentTree) {
-                products.addAll(productRepository.findAllByDepartmentAndManufacturer(dep, manufacturer));
-            }
-        }else{
-            for (Department dep : departmentTree) {
-                products.addAll(productRepository.findAllByDepartment(dep));
-            }
-        }
+        List<Product> products = getProductsByDepartment(departmentId, brandId, new ArrayList<>());
 
         List<Product> list;
 
@@ -138,6 +125,23 @@ public class ProductService {
                 products.size());
     }
 
+    private List<Product> getProductsByDepartment(long departmentId, String brandId, List<Product> products) {
+        Department department = departmentService.getOne(departmentId);
+        List<Department>departmentTree = getDepartmentsTree(department);
+
+        if(brandId != null && !brandId.equals("all")){
+            Manufacturer manufacturer = manufacturerService.getOne(Long.parseLong(brandId));
+            for (Department dep : departmentTree) {
+                products.addAll(productRepository.findAllByDepartmentAndManufacturer(dep, manufacturer));
+            }
+        }else{
+            for (Department dep : departmentTree) {
+                products.addAll(productRepository.findAllByDepartment(dep));
+            }
+        }
+        return products;
+    }
+
     private List<Department> getDepartmentsTree(Department department){
         List<Department> departments = new ArrayList<>();
         departments.add(department);
@@ -147,5 +151,18 @@ public class ProductService {
         return departments;
     }
 
+    public List<Product> getProductsByDep(Long depId){
+       return getProductsByDepartment(depId, null, new ArrayList<>());
+    }
+
+    public List<Product> getProductsByManufacturer(Long manufacturerId){
+        Manufacturer manufacturer = manufacturerService.getOne(manufacturerId);
+        return this.productRepository.findAllByManufacturer(manufacturer);
+    }
+
+    public List<Product> getProductsBySupplier(Long supplierId){
+        Supplier supplier = supplierService.getOne(supplierId);
+        return this.productRepository.findAllBySupplier(supplier);
+    }
 
 }

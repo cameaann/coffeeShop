@@ -22,7 +22,12 @@
         </div>
         <input class="btn" type="submit"/>
     </form>
-
+    <div id="errorModal" th:class="modal" th:if="${errorMessage != null}">
+        <div class="modal-content">
+            <p th:text="${errorMessage}"></p>
+            <button onclick="closeModalDialog()" th:class="|close btn|">Sulje</button>
+        </div>
+    </div>
     <table>
         <thead>
         <tr>

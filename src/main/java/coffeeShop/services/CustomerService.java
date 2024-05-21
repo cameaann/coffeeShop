@@ -29,4 +29,8 @@ public class CustomerService {
             Customer customer = new Customer(name, email);
             this.customerRepository.save(customer);
     }
+
+    public List<Customer> getAll(){
+        return customerRepository.findAll();
+    }
 }

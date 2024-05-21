@@ -1,5 +1,6 @@
 package coffeeShop.controllers;
 
+import coffeeShop.services.ProductService;
 import coffeeShop.services.SupplierService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,14 +9,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SupplierController {
     private SupplierService supplierService;
+    private ProductService productService;
 
-    public SupplierController(SupplierService supplierService) {
+    public SupplierController(SupplierService supplierService, ProductService productService) {
         this.supplierService = supplierService;
+        this.productService = productService;
     }
 
     @GetMapping("/suppliers")
     public String getSuppliers(Model model) {
         model.addAttribute("suppliers", this.supplierService.list());
+        model.addAttribute("errorMessage", this.supplierService.getErrorMessage());
         return "admin/suppliers";
     }
 
@@ -48,7 +52,12 @@ public class SupplierController {
 
     @PostMapping("/suppliers/{supplierId}")
     public String delete(@PathVariable(value = "supplierId") long supplierId) {
-        this.supplierService.remove(supplierId);
+        if(productService.getProductsBySupplier(supplierId).isEmpty()){
+            this.supplierService.remove(supplierId);
+        }
+        else {
+            supplierService.setErrorMessage("Ei ole mahdollista poistaa toimittaja, koska tietokannassa on vielä tämän toimitajan tuotteita.");
+        }
         return "redirect:/suppliers";
     }
 }

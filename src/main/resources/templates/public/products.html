@@ -5,9 +5,8 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header(${departmentId}, ${cart.getNumberOfProducts()})}"></div>
-<main class="main">
-    <section class="product-section">
-        <h1 class="section-title" th:text="${departmentName}">Products</h1>
+<div th:class="wrap-container">
+    <div th:class="side-bar">
         <form class="search-form" th:action="@{/products}" method="get">
             <input type="hidden" name="id" th:value="${departmentId}" />
             <label th:for="manufacturerId">Search brand</label>
@@ -17,35 +16,41 @@
                         th:text="${manufacturer.name}" th:selected="${manufacturer.id == selectedManufacturerId}"></option>
             </select>
         </form>
-        <ul th:class="cards-container" >
-            <li th:each="product, iStat : ${productPage}" th:class="product-card">
-                <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
-                    <figure>
-                        <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
-                             th:alt="${product.getProductImgName()}">
-                    </figure>
-                    <h3 class="product-title" th:text="${product.getName()}"></h3>
-                    <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
-                </a>
+    </div>
+    <main class="main">
+        <section class="product-section">
+<!--            <h1 class="section-title" th:text="${departmentName}">Products</h1>-->
+            <ul th:class="cards-container" >
+                <li th:each="product, iStat : ${productPage}" th:class="product-card">
+                    <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
+                        <figure>
+                            <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
+                                 th:alt="${product.getProductImgName()}">
+                        </figure>
+                        <h3 class="product-title" th:text="${product.getName()}"></h3>
+                        <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
+                    </a>
 
-                <form th:action="@{/cart(depId=${departmentId},
+                    <form th:action="@{/cart(depId=${departmentId},
                                     productId=${product.id},
                                     name=${product.getName()},
                                     price=${product.getPrice()})}" th:method="POST">
-                    <input class="btn" type="submit" value="Lisää ostoskoriin"/>
-                </form>
-            </li>
-        </ul>
-        <div class="page-number-container" th:if="${productPage.totalPages > 0}" >
-            <div class="pagination"
-                 th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/products (size=${productPage.size}, page=${pageNumber}, id=${departmentId} )}"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==productPage.number + 1} ? active"></a>
+                        <input onclick="progressBar()" class="btn" type="submit" value="Lisää ostoskoriin"/>
+                    </form>
+                </li>
+            </ul>
+            <div class="page-number-container" th:if="${productPage.totalPages > 0}" >
+                <div class="pagination"
+                     th:each="pageNumber : ${pageNumbers}">
+                    <a th:href="@{/products (size=${productPage.size}, page=${pageNumber}, id=${departmentId} )}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==productPage.number + 1} ? active"></a>
+                </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
+</div>
+
 <div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>

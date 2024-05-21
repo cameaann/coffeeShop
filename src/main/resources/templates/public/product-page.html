@@ -9,14 +9,21 @@
     <section class="product">
         <div class="singleProductCard">
             <figure>
-                <img class="productImage" th:src="@{/image/{id}(id=${product.id})}" th:alt="${product.getProductImgName()}">
+                <img class="productImage" th:src="@{/image/{id}(id=${product.id})}"
+                     th:alt="${product.getProductImgName()}">
             </figure>
             <div>
                 <h1 th:text="${product.getName()}"></h1>
-                    <p  th:text="${product.getDescription()}"></p>
-                    <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
-                <button class="btn" type="submit">Lisää ostoskoriin</button>
+                <p th:text="${product.getDescription()}"></p>
+                <div class="product-price single-product-price" th:text="${product.getPrice() + '&euro;'}"></div>
+                <form th:action="@{/product/cart(depId=${depId},
+                                    productId=${product.id},
+                                    name=${product.getName()},
+                                    price=${product.getPrice()})}" th:method="POST">
+                    <input onclick="progressBar()" class="btn" type="submit" value="Lisää ostoskoriin"/>
+                </form>
             </div>
+
         </div>
         <div>
             <a class="link-btn" th:href="@{/products(id=${depId})}">

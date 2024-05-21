@@ -36,6 +36,23 @@ public class CartController {
         return "redirect:/products?id="+depId;
     }
 
+    @PostMapping("/product/cart")
+    public String addToCartFromProductPage(@RequestParam long depId,
+                             @RequestParam long productId,
+                             @RequestParam String name,
+                             @RequestParam BigDecimal price){
+        cartService.addProduct(productId, name, price);
+        return "redirect:/product-page/"+productId +"?depId="+depId;
+    }
+
+    @PostMapping("/home/cart")
+    public String addToCartFromHomePage(@RequestParam long depId,
+                                        @RequestParam long productId,
+                                        @RequestParam String name,
+                                        @RequestParam BigDecimal price){
+        cartService.addProduct(productId, name, price);
+        return "redirect:/";
+    }
 
     @PostMapping("/cart/increase/{productId}")
     public String increaseQuantity(@PathVariable long productId){

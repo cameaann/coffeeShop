@@ -3,13 +3,20 @@ package coffeeShop.services;
 import coffeeShop.models.Supplier;
 import coffeeShop.repositories.SupplierRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SupplierService {
-    @Autowired
+
+    @Getter
+    private String errorMessage;
+
     private SupplierRepository supplierRepository;
+
+    public SupplierService(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
+    }
 
     public Iterable<Supplier> list(){
         return supplierRepository.findAll();
@@ -50,5 +57,13 @@ public class SupplierService {
         supplier.setContactPerson(contactPerson);
         supplier.setContactPersonEmail(contactPersonEmail);
         return supplier;
+    }
+
+    public void setErrorMessage(String err){
+        this.errorMessage = err;
+    }
+
+    public void clearErrorMessage() {
+        this.errorMessage = null;
     }
 }

@@ -24,11 +24,15 @@
             <td>
                 <div th:class="cart-number">
                     <form th:action="@{/cart/increase/{productId}(productId = ${item.getProductId()})}" th:method="POST">
-                        <button th:class="cart-btn" type="submit">+</button>
+                        <button th:class="cart-btn" type="submit">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                     </form>
                     <span th:text="${item.getQuantity()}">0</span>
                     <form th:action="@{/cart/decrease/{productId}(productId = ${item.getProductId()})}" th:method="POST">
-                        <button th:class="cart-btn" type="submit">-</button>
+                        <button th:class="cart-btn" type="submit">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
                     </form>
                 </div>
             </td>

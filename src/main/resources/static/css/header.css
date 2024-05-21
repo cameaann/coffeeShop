@@ -5,7 +5,7 @@
     position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     z-index: 25;
     /*background: linear-gradient(90deg, rgba(42,6,66,1) 0%, rgba(70,2,2,1) 50%, rgba(150,94,15,1) 100%);*/
@@ -14,6 +14,12 @@
 }
 .header.home{
     background: none;
+}
+.logo{
+    margin-left:2rem;
+}
+.logo>img{
+    width:50px;
 }
 .nav{
     display: flex;
@@ -36,6 +42,10 @@
     padding-bottom: .5rem;
     border-bottom:1px solid transparent;
 }
+.nav>li>a:hover{
+    cursor: pointer;
+    color: var(--accentBtnColorHover);
+}
 .signOut{
     background: none;
     color: var(--headingColor);
@@ -52,5 +62,4 @@
 li>a.active{
     color: var(--accentBtnColor);
     display: block;
-    border-bottom:1px solid var(--lightText);
 }

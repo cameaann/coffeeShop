@@ -12,11 +12,27 @@
     <div class="main-banner">
         <h1 class="welcome-heading">Aloita päiväsi kahvilla... </h1>
     </div>
-    <div class="jumbothrone">
-
-    </div>
+    <section class="special">
+        <ul th:class="products-list">
+            <li th:class="product-card" th:each="product : ${coffeeProducts}">
+                <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
+                    <figure>
+                        <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
+                             th:alt="${product.getProductImgName()}">
+                    </figure>
+                    <h3 class="product-title" th:text="${product.getName()}"></h3>
+                    <div class="product-price" th:text="${product.getPrice() + '&euro;'}"></div>
+                </a>
+                <form th:action="@{/home/cart(depId=${departmentId},
+                                    productId=${product.id},
+                                    name=${product.getName()},
+                                    price=${product.getPrice()})}" th:method="POST">
+                    <input onclick="progressBar()" class="btn" type="submit" value="Lisää ostoskoriin"/>
+                </form>
+            </li>
+        </ul>
+    </section>
 </main>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
-<!--<script type="text/javascript" th:src="@{js/script.js}"></script>-->
 </body>
 </html>

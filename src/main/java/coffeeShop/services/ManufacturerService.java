@@ -3,11 +3,15 @@ package coffeeShop.services;
 import coffeeShop.models.Manufacturer;
 import coffeeShop.repositories.ManufacturerRepository;
 import jakarta.transaction.Transactional;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ManufacturerService {
+    @Getter
+    private String errorMessage;
+
     @Autowired
     private ManufacturerRepository manufacturerRepository;
 
@@ -20,8 +24,6 @@ public class ManufacturerService {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName(name);
         manufacturer.setUrl(url);
-//        manufacturer.setProducts(new ArrayList<Product>());
-//        manufacturer.getProducts().add(product);
         manufacturerRepository.save(manufacturer);
     }
 
@@ -35,7 +37,6 @@ public class ManufacturerService {
         Manufacturer manufacturer = manufacturerRepository.getReferenceById(id);
         manufacturer.setName(name);
         manufacturer.setUrl(url);
-//        manufacturer.setProducts(products);
         manufacturerRepository.save(manufacturer);
     }
 
@@ -47,5 +48,13 @@ public class ManufacturerService {
         else {
             throw new IllegalArgumentException("Manufacturer with ID " + id + " does not exist");
         }
+    }
+
+    public void setErrorMessage(String err){
+        this.errorMessage = err;
+    }
+
+    public void clearErrorMessage() {
+        this.errorMessage = null;
     }
 }

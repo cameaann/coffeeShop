@@ -9,9 +9,9 @@
     <div th:class="side-bar">
         <form class="search-form" th:action="@{/products}" method="get">
             <input type="hidden" name="id" th:value="${departmentId}" />
-            <label th:for="manufacturerId">Search brand</label>
+            <label th:for="manufacturerId">Hae merkkiä</label>
             <select id="manufacturerId" name="manufacturerId" onchange="this.form.submit()">
-                <option th:value="all" th:selected="${manufacturerId == selectedManufacturerId}">All brands</option>
+                <option th:value="all" th:selected="${manufacturerId == selectedManufacturerId}">Kaikki merkit</option>
                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}"
                         th:text="${manufacturer.name}" th:selected="${manufacturer.id == selectedManufacturerId}"></option>
             </select>

@@ -9,7 +9,7 @@
 <header th:replace="~{fragments/header :: header('Cart', ${cart.getNumberOfProducts()})}"></header>
 <body>
 <main th:class="main">
-    <h1>Cart</h1>
+    <h1>Ostokori</h1>
     <table th:class="cart-table">
         <thead>
         <tr>
@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td>
-                <span>Total</span>
+                <span>Yhteissumma</span>
             </td>
             <td th:text="${cart.getNumberOfProducts()}">0</td>
             <td>

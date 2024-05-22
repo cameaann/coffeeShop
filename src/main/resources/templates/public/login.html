@@ -6,7 +6,7 @@
 <body>
 <div th:replace="~{fragments/header :: header('login', ${cart.getNumberOfProducts()})}"></div>
 <main class="main">
-    <h3>Please Log In</h3>
+    <h3>Kirjaudu sisään, ole hyvä</h3>
     <div th:if="${param.error}">
         Invalid username and password.
     </div>
@@ -15,14 +15,14 @@
     </div>
     <form class="form" th:action="@{/login}" method="post">
         <div class="form-field">
-            <label th:for="username">Username</label>
-            <input type="text" name="username" id="username" placeholder="Username" autocomplete="off"/>
+            <label th:for="username">Käyttäjätunnus</label>
+            <input type="text" name="username" id="username" autocomplete="off"/>
         </div>
         <div class="form-field">
-            <label th:for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Password" autocomplete="off"/>
+            <label th:for="password">Salasana</label>
+            <input type="password" name="password" id="password"  autocomplete="off"/>
         </div>
-        <input th:class="btn" type="submit" value="Sign in"/>
+        <input th:class="btn" type="submit" value="Kirjaudu"/>
     </form>
 </main>
 <div th:replace="~{fragments/footer :: footer}"></div>

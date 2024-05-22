@@ -22,7 +22,7 @@
             <label th:for="password">Salasana</label>
             <input type="password" name="password" id="password"  autocomplete="off"/>
         </div>
-        <input th:class="btn" type="submit" value="Kirjaudu"/>
+        <input onclick="progressBar()" th:class="btn" type="submit" value="Kirjaudu"/>
     </form>
 </main>
 <div th:replace="~{fragments/footer :: footer}"></div>

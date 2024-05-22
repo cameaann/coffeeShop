@@ -19,10 +19,9 @@
     </div>
     <main class="main">
         <section class="product-section">
-<!--            <h1 class="section-title" th:text="${departmentName}">Products</h1>-->
             <ul th:class="cards-container" >
                 <li th:each="product, iStat : ${productPage}" th:class="product-card">
-                    <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId})}">
+                    <a th:class="product-card-content" th:href="@{/product-page/{id}(id=${product.id}, depId=${departmentId}, page=${'products'})}">
                         <figure>
                             <img th:class="product-card-img" th:src="@{/image/{id}(id=${product.id})}"
                                  th:alt="${product.getProductImgName()}">

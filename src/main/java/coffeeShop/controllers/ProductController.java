@@ -138,7 +138,9 @@ public class ProductController {
 
     @GetMapping("/product-page/{id}")
     public String showOneProduct(Model model, @PathVariable(value = "id") long productId,
-                                 @Param(value = "depId") long depId) {
+                                 @Param(value = "depId") long depId,
+                                 @Param(value = "page") String page) {
+        model.addAttribute("page", page);
         model.addAttribute("cart", cartService.getCart());
         model.addAttribute("depId", depId);
         model.addAttribute("product", productService.getOne(productId));

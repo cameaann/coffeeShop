@@ -8,7 +8,6 @@
     justify-content: space-between;
     align-items: center;
     z-index: 25;
-    /*background: linear-gradient(90deg, rgba(42,6,66,1) 0%, rgba(70,2,2,1) 50%, rgba(150,94,15,1) 100%);*/
     background-color: var(--lightText);
     border-bottom: 1px solid var(--tableBorderColor);
 }
@@ -17,6 +16,7 @@
 }
 .logo{
     margin-left:2rem;
+    margin-right: 2rem;
 }
 .logo>img{
     width:50px;
@@ -25,11 +25,10 @@
     display: flex;
     flex-direction: row;
     list-style: none;
-    /*width:70%;*/
     margin: 0;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-inline-end: 2rem;
 }
 .nav>li>a{

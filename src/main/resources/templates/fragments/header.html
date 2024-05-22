@@ -39,9 +39,11 @@
 
 <!-- /*  Header for Admin page */-->
 <div class="header" id="header-admin" th:fragment="header-admin(title)">
-    <figure th:class="logo">
-        <img th:src="@{/images/coffeeShopLogo.svg}" alt="logo">
-    </figure>
+    <a onclick="progressBar()" th:href="@{/}">
+        <figure th:class="logo">
+            <img th:src="@{/images/coffeeShopLogo.svg}" alt="logo">
+        </figure>
+    </a>
     <ul class="nav">
         <li><a onclick="progressBar()" th:class="${#strings.equals(title, 'Home')}  ? 'active':''" th:href="@{/}">Kahvi Kauppa</a></li>
         <li><a onclick="progressBar()" th:class="${#strings.equals(title, 'Suppliers')}  ? 'active' : ''" th:href="@{/suppliers}">Toimittajat</a></li>

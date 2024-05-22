@@ -47,8 +47,8 @@ public class SecurityConfig {
                         .requestMatchers("/", "/home", "/customer-registration", "/success-registration",
                                 "/products", "/product-page/{id}", "/login", "/cart", "/home/cart", "/product/cart",
                                 "/cart/increase/{itemId}", "/cart/decrease/{itemId}", "/vip-customers").permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers(toH2Console()).permitAll()
+//                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+//                        .requestMatchers(toH2Console()).permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/header.html", "/head.html").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
@@ -61,8 +61,8 @@ public class SecurityConfig {
                         .loginPage(LOGIN_URL)
                         .permitAll())
                 .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler).permitAll())
-                .headers(headers -> headers.disable())
-                .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+                .headers(headers -> headers.disable());
+//                .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
         return http.build();
 
     }
